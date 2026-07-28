@@ -10,6 +10,9 @@ difficulty: "Extreme (8,000m peak)"
 route: "Southwest Face via Yalung Glacier"
 coordinates: [27.7025, 88.1475]
 heroImage: "/images/climbs/kangchenjunga.jpg"
+gallery:
+  - "/images/climbs/kangchenjunga.jpg"
+  - "/images/climbs/kangchenjunga-glacier.jpg"
 profile:
   - label: "Yalung Base Camp"
     elevationFt: 16700
