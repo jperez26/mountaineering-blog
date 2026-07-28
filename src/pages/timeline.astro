@@ -8,14 +8,16 @@ const posts = await getCollection('blog', ({ data }) => !data.draft);
 
 const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
 
-const events = [
-  ...climbs.map((c) => ({
-    date: c.data.date,
-    kind: c.data.status === 'completed' ? 'summit' : 'planned',
-    title: c.data.mountain,
-    detail: c.data.summary,
-    href: c.data.status === 'completed' ? `/summits/${c.id}` : `/planned/${c.id}`,
-  })),
+const dated = [
+  ...climbs
+    .filter((c) => c.data.date)
+    .map((c) => ({
+      date: c.data.date!,
+      kind: c.data.status === 'completed' ? 'summit' : 'planned',
+      title: c.data.mountain,
+      detail: c.data.summary,
+      href: c.data.status === 'completed' ? `/summits/${c.id}` : `/planned/${c.id}`,
+    })),
   ...posts.map((p) => ({
     date: p.data.date,
     kind: 'post',
@@ -25,10 +27,18 @@ const events = [
   })),
 ].sort((a, b) => a.date.valueOf() - b.date.valueOf());
 
+// Long-term goals with no fixed date yet (e.g. Kangchenjunga) get their own
+// section at the end instead of being forced into the chronological line.
+const someday = climbs
+  .filter((c) => !c.data.date)
+  .map((c) => ({ title: c.data.mountain, detail: c.data.summary, href: `/planned/${c.id}` }));
+
+const events = dated;
+
 const kindStyles = {
-  summit: { dot: 'bg-summit-ice', label: 'Summit', badge: 'bg-summit-ice text-summit-navy' },
-  planned: { dot: 'bg-summit-ember', label: 'Planned', badge: 'bg-summit-ember text-summit-navy' },
-  post: { dot: 'bg-summit-slate', label: 'Journal', badge: 'bg-summit-slate text-summit-snow' },
+  summit: { dot: 'bg-summit-moss', label: 'Summit', badge: 'bg-summit-moss text-summit-forest' },
+  planned: { dot: 'bg-summit-ember', label: 'Planned', badge: 'bg-summit-ember text-summit-forest' },
+  post: { dot: 'bg-summit-fern', label: 'Journal', badge: 'bg-summit-fern text-summit-snow' },
 };
 ---
 
@@ -36,24 +46,39 @@ const kindStyles = {
   <Hero image="/images/climbs/iztaccihuatl.jpg" eyebrow="The Journey" title="Timeline" subtitle="Every summit, plan, and journal entry, laid out in order." size="md" />
 
   <section class="mx-auto max-w-3xl px-4 sm:px-6 py-20 reveal">
-    <div class="relative border-l-2 border-summit-slate/15 pl-8 space-y-10">
+    <div class="relative border-l-2 border-summit-fern/15 pl-8 space-y-10">
       {events.map((event) => {
         const style = kindStyles[event.kind as keyof typeof kindStyles];
         return (
           <div class="relative">
             <span class={`absolute -left-[2.55rem] top-1 h-4 w-4 rounded-full border-2 border-summit-snow ${style.dot}`}></span>
-            <p class="text-xs font-semibold uppercase tracking-wide text-summit-slate/60">
+            <p class="text-xs font-semibold uppercase tracking-wide text-summit-fern/60">
               {event.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
             </p>
             <a href={withBase(event.href)} class="group block mt-1">
               <span class={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold mb-1 ${style.badge}`}>{style.label}</span>
-              <h3 class="font-display text-xl font-bold text-summit-navy group-hover:text-summit-ember-dark transition-colors">{event.title}</h3>
-              <p class="text-summit-slate/80 mt-1 line-clamp-2">{event.detail}</p>
+              <h3 class="font-display text-xl font-bold text-summit-forest group-hover:text-summit-ember-dark transition-colors">{event.title}</h3>
+              <p class="text-summit-fern/80 mt-1 line-clamp-2">{event.detail}</p>
             </a>
           </div>
         );
       })}
-      {events.length === 0 && <p class="text-summit-slate/70">Nothing to show yet — add climbs or blog posts to see them here.</p>}
+      {events.length === 0 && <p class="text-summit-fern/70">Nothing to show yet — add climbs or blog posts to see them here.</p>}
     </div>
+
+    {someday.length > 0 && (
+      <div class="mt-16">
+        <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark">Someday</p>
+        <h2 class="font-display text-2xl font-bold text-summit-forest mt-1">Long-Term Goals</h2>
+        <div class="mt-4 space-y-4">
+          {someday.map((goal) => (
+            <a href={withBase(goal.href)} class="group block rounded-xl bg-white shadow-sm ring-1 ring-summit-fern/10 p-5 card-hover">
+              <h3 class="font-display text-lg font-bold text-summit-forest group-hover:text-summit-ember-dark transition-colors">{goal.title}</h3>
+              <p class="text-summit-fern/80 mt-1">{goal.detail}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
   </section>
 </BaseLayout>

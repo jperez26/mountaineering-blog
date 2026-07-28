@@ -15,7 +15,7 @@ const contactEmail = 'you@example.com';
 
   <section class="mx-auto max-w-2xl px-4 sm:px-6 py-20 reveal">
     {!isConfigured && (
-      <div class="mb-8 rounded-xl border border-summit-ember/40 bg-orange-50 px-5 py-4 text-sm text-summit-navy">
+      <div class="mb-8 rounded-xl border border-summit-ember/40 bg-orange-50 px-5 py-4 text-sm text-summit-forest">
         <strong>Heads up:</strong> this form isn't wired up yet. Create a free account at
         <a href="https://formspree.io" target="_blank" rel="noopener" class="underline font-semibold">formspree.io</a>,
         grab your form ID, and replace <code>YOUR_FORM_ID</code> in <code>src/pages/contact.astro</code>. Full steps are in
@@ -24,45 +24,45 @@ const contactEmail = 'you@example.com';
       </div>
     )}
 
-    <form action={formAction} method="POST" class="space-y-5 rounded-2xl bg-white shadow-md ring-1 ring-summit-slate/5 p-6 sm:p-8">
+    <form action={formAction} method="POST" class="space-y-5 rounded-2xl bg-white shadow-md ring-1 ring-summit-fern/5 p-6 sm:p-8">
       <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
 
       <div>
-        <label for="name" class="block text-sm font-semibold text-summit-navy">Name</label>
+        <label for="name" class="block text-sm font-semibold text-summit-forest">Name</label>
         <input
           id="name"
           name="name"
           type="text"
           required
-          class="mt-1 w-full rounded-lg border border-summit-slate/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-ice"
+          class="mt-1 w-full rounded-lg border border-summit-fern/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-moss"
         />
       </div>
 
       <div>
-        <label for="email" class="block text-sm font-semibold text-summit-navy">Email</label>
+        <label for="email" class="block text-sm font-semibold text-summit-forest">Email</label>
         <input
           id="email"
           name="email"
           type="email"
           required
-          class="mt-1 w-full rounded-lg border border-summit-slate/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-ice"
+          class="mt-1 w-full rounded-lg border border-summit-fern/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-moss"
         />
       </div>
 
       <div>
-        <label for="message" class="block text-sm font-semibold text-summit-navy">Message</label>
+        <label for="message" class="block text-sm font-semibold text-summit-forest">Message</label>
         <textarea
           id="message"
           name="message"
           rows="5"
           required
-          class="mt-1 w-full rounded-lg border border-summit-slate/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-ice"
+          class="mt-1 w-full rounded-lg border border-summit-fern/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-moss"
         ></textarea>
       </div>
 
       <button
         type="submit"
-        class="rounded-full bg-summit-ember px-6 py-3 font-semibold text-summit-navy hover:bg-orange-400 transition-colors"
+        class="rounded-full bg-summit-ember px-6 py-3 font-semibold text-summit-forest hover:bg-orange-400 transition-colors"
       >
         Send Message
       </button>

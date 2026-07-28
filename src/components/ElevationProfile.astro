@@ -1,0 +1,105 @@
+---
+// A schematic side-view elevation profile: trailhead/basecamp -> summit,
+// plotted from an ordered list of named waypoints. Not a surveyed GPS
+// track — x-spacing is by order, not real distance. That's called out
+// in the caption below the chart, not hidden.
+interface Waypoint {
+  label: string;
+  elevationFt: number;
+}
+interface Props {
+  profile: Waypoint[];
+  gainFt?: number;
+}
+const { profile, gainFt } = Astro.props;
+
+const width = 900;
+const height = 340;
+const padding = { top: 36, right: 28, bottom: 56, left: 64 };
+const plotW = width - padding.left - padding.right;
+const plotH = height - padding.top - padding.bottom;
+
+const elevations = profile.map((p) => p.elevationFt);
+const minEl = Math.min(...elevations);
+const maxEl = Math.max(...elevations);
+const span = maxEl - minEl || 1;
+const yPad = span * 0.15;
+const domainMin = minEl - yPad;
+const domainMax = maxEl + yPad;
+
+const xFor = (i: number) => padding.left + (profile.length === 1 ? plotW / 2 : (i * plotW) / (profile.length - 1));
+const yFor = (elevationFt: number) => padding.top + plotH - ((elevationFt - domainMin) / (domainMax - domainMin)) * plotH;
+
+const points = profile.map((p, i) => ({ ...p, x: xFor(i), y: yFor(p.elevationFt) }));
+const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x},${p.y}`).join(' ');
+const areaPath = `${linePath} L${points[points.length - 1].x},${padding.top + plotH} L${points[0].x},${padding.top + plotH} Z`;
+
+// 4 evenly spaced elevation gridlines/ticks across the domain
+const tickCount = 4;
+const ticks = Array.from({ length: tickCount + 1 }, (_, i) => domainMin + (i * (domainMax - domainMin)) / tickCount);
+---
+
+<div class="rounded-2xl bg-white shadow-md ring-1 ring-summit-fern/10 p-4 sm:p-6">
+  <div class="flex items-baseline justify-between gap-4 mb-2">
+    <h3 class="font-display text-lg font-bold text-summit-forest">Route Profile</h3>
+    {gainFt && <p class="text-sm font-semibold text-summit-ember-dark">{gainFt.toLocaleString()} ft gain</p>}
+  </div>
+  <svg viewBox={`0 0 ${width} ${height}`} class="w-full h-auto" role="img" aria-label="Elevation profile of the route from start to summit">
+    <!-- gridlines -->
+    {ticks.map((t) => {
+      const y = yFor(t);
+      return (
+        <g>
+          <line x1={padding.left} y1={y} x2={width - padding.right} y2={y} stroke="#33513c" stroke-opacity="0.12" stroke-width="1" />
+          <text x={padding.left - 10} y={y} text-anchor="end" dominant-baseline="middle" font-size="12" fill="#33513c" opacity="0.55">
+            {Math.round(t).toLocaleString()}'
+          </text>
+        </g>
+      );
+    })}
+
+    <!-- filled area under the route line, like a mountain silhouette -->
+    <defs>
+      <linearGradient id="profile-fill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4d8f5e" stop-opacity="0.35" />
+        <stop offset="100%" stop-color="#4d8f5e" stop-opacity="0.03" />
+      </linearGradient>
+    </defs>
+    <path d={areaPath} fill="url(#profile-fill)" />
+    <path d={linePath} fill="none" stroke="#3f7d4f" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
+
+    <!-- waypoints -->
+    {points.map((p, i) => {
+      const isSummit = i === points.length - 1;
+      const labelUp = i % 2 === 0;
+      return (
+        <g>
+          <circle cx={p.x} cy={p.y} r={isSummit ? 7 : 5.5} fill={isSummit ? '#c8702f' : '#3f7d4f'} stroke="white" stroke-width="2">
+            <title>{`${p.label}: ${p.elevationFt.toLocaleString()} ft`}</title>
+          </circle>
+          <text
+            x={p.x}
+            y={labelUp ? p.y - 16 : p.y + 24}
+            text-anchor="middle"
+            font-size="12.5"
+            font-weight="600"
+            fill="#182e21"
+          >
+            {p.label}
+          </text>
+          <text
+            x={p.x}
+            y={labelUp ? p.y - 3 : p.y + 37}
+            text-anchor="middle"
+            font-size="11"
+            fill="#33513c"
+            opacity="0.7"
+          >
+            {p.elevationFt.toLocaleString()}'
+          </text>
+        </g>
+      );
+    })}
+  </svg>
+  <p class="mt-2 text-xs text-summit-fern/50">Schematic route profile — waypoints are illustrative, not a surveyed GPS track.</p>
+</div>

@@ -11,14 +11,26 @@ const climbs = defineCollection({
     mountain: z.string(),
     elevationFt: z.number(),
     elevationM: z.number().optional(),
+    elevationGainFt: z.number().optional(),
     region: z.string(),
     status: z.enum(['completed', 'planned']),
-    date: z.coerce.date(),
+    // Omit entirely for a long-term/someday goal with no fixed date yet.
+    date: z.coerce.date().optional(),
     difficulty: z.string().optional(),
     route: z.string().optional(),
     coordinates: z.tuple([z.number(), z.number()]).optional(),
     heroImage: z.string().optional(),
     gallery: z.array(z.string()).optional(),
+    // Schematic route profile (trailhead -> summit), ordered start to finish.
+    // Not to-scale GPS data — illustrative waypoints for the elevation chart.
+    profile: z
+      .array(
+        z.object({
+          label: z.string(),
+          elevationFt: z.number(),
+        })
+      )
+      .optional(),
     summary: z.string(),
     draft: z.boolean().default(false),
   }),
@@ -32,6 +44,19 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     heroImage: z.string().optional(),
     excerpt: z.string(),
+    // Optional "trip info" panel rendered before the narrative body —
+    // fill these in for a summit story, skip them for a plain post.
+    mountain: z.string().optional(),
+    howToGetThere: z.string().optional(),
+    whatToBring: z.array(z.string()).optional(),
+    costBreakdown: z
+      .array(
+        z.object({
+          item: z.string(),
+          cost: z.string(),
+        })
+      )
+      .optional(),
     draft: z.boolean().default(false),
   }),
 });

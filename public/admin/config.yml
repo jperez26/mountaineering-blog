@@ -1,0 +1,105 @@
+backend:
+  name: github
+  repo: jperez26/mountaineering-blog # TODO: update if your GitHub username or repo name differs
+  branch: main
+  base_url: https://YOUR-WORKER-SUBDOMAIN.workers.dev # TODO: set after deploying cms-oauth-worker (see ADMIN_SETUP.md)
+  auth_endpoint: auth
+
+publish_mode: simple
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "climbs"
+    label: "Climbs (Summits & Planned Trips)"
+    folder: "src/content/climbs"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - { label: "Title", name: "title", widget: "string", hint: "e.g. \"Mount Rainier — Disappointment Cleaver\"" }
+      - { label: "Mountain", name: "mountain", widget: "string" }
+      - { label: "Elevation (ft)", name: "elevationFt", widget: "number", value_type: "int" }
+      - { label: "Elevation (m)", name: "elevationM", widget: "number", value_type: "int", required: false }
+      - { label: "Elevation Gain (ft)", name: "elevationGainFt", widget: "number", value_type: "int", required: false, hint: "Vertical gain from trailhead to summit — powers the homepage total." }
+      - { label: "Region", name: "region", widget: "string" }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options: ["completed", "planned"]
+      - label: "Date"
+        name: "date"
+        widget: "datetime"
+        required: false
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        hint: "Leave blank for a someday/long-term goal with no fixed date."
+      - { label: "Difficulty", name: "difficulty", widget: "string", required: false }
+      - { label: "Route", name: "route", widget: "string", required: false }
+      - label: "Coordinates [latitude, longitude]"
+        name: "coordinates"
+        widget: "list"
+        required: false
+        hint: "Enter exactly two numbers: latitude, then longitude."
+        field: { label: "Value", name: "value", widget: "number" }
+      - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+      - label: "Gallery"
+        name: "gallery"
+        widget: "list"
+        required: false
+        field: { label: "Image", name: "image", widget: "image" }
+      - label: "Route Profile"
+        name: "profile"
+        widget: "list"
+        required: false
+        hint: "Ordered waypoints from trailhead to summit — powers the Route Profile chart. Schematic, not GPS data."
+        fields:
+          - { label: "Waypoint Label", name: "label", widget: "string" }
+          - { label: "Elevation (ft)", name: "elevationFt", widget: "number", value_type: "int" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Draft (hide from site)", name: "draft", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Tags", name: "tags", widget: "list", default: [] }
+      - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Mountain (for the Trip Info box)", name: "mountain", widget: "string", required: false }
+      - { label: "How To Get There", name: "howToGetThere", widget: "text", required: false }
+      - { label: "What To Bring", name: "whatToBring", widget: "list", required: false }
+      - label: "Cost Breakdown"
+        name: "costBreakdown"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Item", name: "item", widget: "string" }
+          - { label: "Cost", name: "cost", widget: "string", hint: "e.g. \"$50\"" }
+      - { label: "Draft (hide from site)", name: "draft", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "gear"
+    label: "Gear Reviews"
+    folder: "src/content/gear"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: item
+    fields:
+      - { label: "Item Name", name: "item", widget: "string" }
+      - { label: "Brand", name: "brand", widget: "string", required: false }
+      - { label: "Category", name: "category", widget: "string", hint: "e.g. Footwear, Shelter, Layers, Safety" }
+      - { label: "Rating (1-5)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5 }
+      - { label: "Price Range", name: "priceRange", widget: "string", required: false }
+      - { label: "Pros", name: "pros", widget: "list", default: [] }
+      - { label: "Cons", name: "cons", widget: "list", default: [] }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Elevation Tags", name: "elevationTags", widget: "list", default: [] }
+      - { label: "Draft (hide from site)", name: "draft", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }

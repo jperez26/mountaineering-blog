@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { title, description = 'Summit log, gear notes, and trip plans from the mountains.' } = Astro.props;
-const siteTitle = 'Summit Journal';
+const siteTitle = 'Avg Joe Mountaineering';
 ---
 
 <!doctype html>
@@ -25,7 +25,7 @@ const siteTitle = 'Summit Journal';
     <meta name="description" content={description} />
     <title>{title} · {siteTitle}</title>
   </head>
-  <body class="min-h-screen flex flex-col bg-summit-snow text-summit-navy font-body topo-bg">
+  <body class="min-h-screen flex flex-col bg-summit-snow text-summit-forest font-body topo-bg">
     <Nav siteTitle={siteTitle} />
     <main class="flex-1">
       <slot />

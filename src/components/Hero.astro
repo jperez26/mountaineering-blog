@@ -11,7 +11,7 @@ const withBase = (src: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + 
 const heightClass = size === 'lg' ? 'h-[75vh] min-h-[480px]' : 'h-[42vh] min-h-[300px]';
 ---
 
-<section class={`relative ${heightClass} w-full overflow-hidden bg-summit-navy`}>
+<section class={`relative ${heightClass} w-full overflow-hidden bg-summit-forest`}>
   <img
     src={withBase(image)}
     alt=""
@@ -20,18 +20,18 @@ const heightClass = size === 'lg' ? 'h-[75vh] min-h-[480px]' : 'h-[42vh] min-h-[
   />
   <!-- Flat tint everywhere, so text stays legible no matter how bright the
        photo is, plus a directional gradient for extra depth at the edges. -->
-  <div class="absolute inset-0 bg-summit-navy/35"></div>
-  <div class="absolute inset-0 bg-gradient-to-t from-summit-navy/95 via-summit-navy/45 to-summit-navy/25"></div>
+  <div class="absolute inset-0 bg-summit-forest/35"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-summit-forest/95 via-summit-forest/45 to-summit-forest/25"></div>
   <div class="absolute inset-0 topo-bg-dark opacity-60"></div>
 
   <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-summit-snow">
     {eyebrow && (
-      <p class="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-summit-ice">{eyebrow}</p>
+      <p class="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-summit-moss">{eyebrow}</p>
     )}
     <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold drop-shadow-lg max-w-3xl [text-shadow:0_2px_20px_rgba(0,0,0,0.5)]">
       {title}
     </h1>
-    {subtitle && <p class="mt-4 max-w-xl text-lg text-summit-glacier/90 [text-shadow:0_1px_8px_rgba(0,0,0,0.4)]">{subtitle}</p>}
+    {subtitle && <p class="mt-4 max-w-xl text-lg text-summit-mist/90 [text-shadow:0_1px_8px_rgba(0,0,0,0.4)]">{subtitle}</p>}
     <slot />
   </div>
 </section>

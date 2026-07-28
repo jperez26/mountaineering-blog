@@ -1,16 +1,18 @@
 ---
+import NavIcon from './NavIcon.astro';
+
 interface Props {
   siteTitle: string;
 }
 const { siteTitle } = Astro.props;
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/summits', label: 'Summits' },
-  { href: '/planned', label: 'Planned Trips' },
-  { href: '/timeline', label: 'Timeline' },
-  { href: '/map', label: 'Map' },
+  { href: '/', label: 'Home', icon: 'home' as const },
+  { href: '/blog', label: 'Blog', icon: 'blog' as const },
+  { href: '/summits', label: 'Summits', icon: 'axe' as const },
+  { href: '/planned', label: 'Planned Trips', icon: 'screw' as const },
+  { href: '/timeline', label: 'Timeline', icon: 'timeline' as const },
+  { href: '/map', label: 'Map', icon: 'map' as const },
 ];
 
 const gearLinks = [
@@ -22,22 +24,23 @@ const path = new URL(Astro.request.url).pathname;
 const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
 ---
 
-<header class="sticky top-0 z-50 bg-summit-navy/90 backdrop-blur-md text-summit-snow shadow-lg border-b border-white/5">
+<header class="sticky top-0 z-50 bg-summit-forest/90 backdrop-blur-md text-summit-snow shadow-lg border-b border-white/5">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
     <div class="flex h-16 items-center justify-between">
       <a href={withBase('/')} class="font-display text-xl font-bold tracking-wide">
         {siteTitle}
       </a>
 
-      <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold">
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold">
         {links.map((link) => (
           <a
             href={withBase(link.href)}
             class:list={[
-              'nav-link transition-colors hover:text-summit-ice',
-              path === link.href || (link.href !== '/' && path.startsWith(link.href)) ? 'active text-summit-ice' : 'text-summit-snow',
+              'nav-link flex items-center gap-1.5 transition-colors hover:text-summit-moss',
+              path === link.href || (link.href !== '/' && path.startsWith(link.href)) ? 'active text-summit-moss' : 'text-summit-snow',
             ]}
           >
+            <NavIcon name={link.icon} />
             {link.label}
           </a>
         ))}
@@ -45,17 +48,18 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
         <div class="relative group">
           <button
             class:list={[
-              'nav-link flex items-center gap-1 transition-colors hover:text-summit-ice',
-              path.startsWith('/gear') ? 'active text-summit-ice' : 'text-summit-snow',
+              'nav-link flex items-center gap-1.5 transition-colors hover:text-summit-moss',
+              path.startsWith('/gear') ? 'active text-summit-moss' : 'text-summit-snow',
             ]}
           >
+            <NavIcon name="carabiner" />
             Gear
             <svg class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5.5 7.5l4.5 5 4.5-5z" /></svg>
           </button>
           <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block pt-3 min-w-[11rem]">
-            <div class="rounded-lg bg-summit-slate shadow-2xl overflow-hidden border border-white/10">
+            <div class="rounded-lg bg-summit-fern shadow-2xl overflow-hidden border border-white/10">
               {gearLinks.map((link) => (
-                <a href={withBase(link.href)} class="block px-4 py-2.5 text-sm hover:bg-summit-navy hover:text-summit-ice transition-colors">
+                <a href={withBase(link.href)} class="block px-4 py-2.5 text-sm hover:bg-summit-forest hover:text-summit-moss transition-colors">
                   {link.label}
                 </a>
               ))}
@@ -65,14 +69,19 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
 
         <a
           href={withBase('/gallery')}
-          class:list={['nav-link transition-colors hover:text-summit-ice', path.startsWith('/gallery') ? 'active text-summit-ice' : 'text-summit-snow']}
+          class:list={[
+            'nav-link flex items-center gap-1.5 transition-colors hover:text-summit-moss',
+            path.startsWith('/gallery') ? 'active text-summit-moss' : 'text-summit-snow',
+          ]}
         >
+          <NavIcon name="camera" />
           Gallery
         </a>
         <a
           href={withBase('/contact')}
-          class="rounded-full bg-summit-ember px-5 py-2 text-summit-navy hover:bg-orange-400 hover:shadow-lg hover:shadow-orange-500/30 transition-all"
+          class="flex items-center gap-1.5 rounded-full bg-summit-ember px-5 py-2 text-summit-forest hover:bg-orange-400 hover:shadow-lg hover:shadow-orange-500/30 transition-all"
         >
+          <NavIcon name="knot" class="h-[18px] w-[18px] text-summit-forest" />
           Contact
         </a>
       </nav>
@@ -86,8 +95,17 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
 
     <nav id="mobile-menu" class="lg:hidden max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out flex flex-col gap-1 text-sm font-semibold">
       <div class="flex flex-col gap-1 pb-4 pt-1">
-        {[...links, ...gearLinks, { href: '/gallery', label: 'Gallery' }, { href: '/contact', label: 'Contact' }].map((link) => (
-          <a href={withBase(link.href)} class="py-2 border-b border-white/5 last:border-0 hover:text-summit-ice">{link.label}</a>
+        {[
+          ...links,
+          { href: '/gear', label: 'Gear Reviews', icon: 'carabiner' as const },
+          { href: '/gear/guide', label: 'Buying Guide', icon: 'carabiner' as const },
+          { href: '/gallery', label: 'Gallery', icon: 'camera' as const },
+          { href: '/contact', label: 'Contact', icon: 'knot' as const },
+        ].map((link) => (
+          <a href={withBase(link.href)} class="flex items-center gap-2 py-2 border-b border-white/5 last:border-0 hover:text-summit-moss">
+            <NavIcon name={link.icon} />
+            {link.label}
+          </a>
         ))}
       </div>
     </nav>

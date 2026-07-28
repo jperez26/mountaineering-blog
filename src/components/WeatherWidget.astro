@@ -1,0 +1,70 @@
+---
+interface Props {
+  lat: number;
+  lng: number;
+  mountain: string;
+}
+const { lat, lng, mountain } = Astro.props;
+const widgetId = `weather-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div
+  id={widgetId}
+  class="weather-widget rounded-2xl bg-white shadow-md ring-1 ring-summit-fern/10 p-5 flex items-center gap-4"
+  data-lat={lat}
+  data-lng={lng}
+>
+  <div class="weather-icon text-3xl leading-none" aria-hidden="true">⛰️</div>
+  <div class="flex-1">
+    <p class="text-xs uppercase tracking-wide text-summit-fern/60">Current Conditions on {mountain}</p>
+    <p class="weather-status mt-1 text-summit-forest font-semibold">Loading live weather…</p>
+  </div>
+</div>
+
+<script>
+  const ICONS: Record<string, string> = {
+    clear: '☀️',
+    mainly_clear: '🌤️',
+    fog: '🌫️',
+    drizzle: '🌦️',
+    rain: '🌧️',
+    snow: '❄️',
+    thunderstorm: '⛈️',
+    unknown: '⛰️',
+  };
+
+  function codeToIcon(code: number) {
+    if (code === 0) return ICONS.clear;
+    if ([1, 2, 3].includes(code)) return ICONS.mainly_clear;
+    if ([45, 48].includes(code)) return ICONS.fog;
+    if ([51, 53, 55, 56, 57].includes(code)) return ICONS.drizzle;
+    if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return ICONS.rain;
+    if ([71, 73, 75, 77, 85, 86].includes(code)) return ICONS.snow;
+    if ([95, 96, 99].includes(code)) return ICONS.thunderstorm;
+    return ICONS.unknown;
+  }
+
+  async function loadWeather(el: Element) {
+    const lat = el.getAttribute('data-lat');
+    const lng = el.getAttribute('data-lng');
+    const statusEl = el.querySelector('.weather-status');
+    const iconEl = el.querySelector('.weather-icon');
+    if (!lat || !lng || !statusEl) return;
+
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current_weather=true&temperature_unit=fahrenheit&wind_speed_unit=mph`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('weather fetch failed');
+      const data = await res.json();
+      const cw = data.current_weather;
+      if (!cw) throw new Error('no current_weather in response');
+
+      if (iconEl) iconEl.textContent = codeToIcon(cw.weathercode);
+      statusEl.textContent = `${Math.round(cw.temperature)}°F · Wind ${Math.round(cw.windspeed)} mph`;
+    } catch {
+      statusEl.textContent = 'Live weather unavailable right now.';
+    }
+  }
+
+  document.querySelectorAll('.weather-widget').forEach(loadWeather);
+</script>

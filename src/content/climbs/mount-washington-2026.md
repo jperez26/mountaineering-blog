@@ -3,6 +3,7 @@ title: "Mount Washington — Lion Head Route (Winter)"
 mountain: "Mount Washington"
 elevationFt: 6288
 elevationM: 1916
+elevationGainFt: 4256
 region: "Presidential Range, New Hampshire, USA"
 status: "completed"
 date: 2026-01-18 # TODO: confirm exact date
@@ -12,6 +13,15 @@ coordinates: [44.2706, -71.30325]
 heroImage: "/images/climbs/washington.jpg"
 gallery:
   - "/images/climbs/washington.jpg"
+profile:
+  - label: "Pinkham Notch"
+    elevationFt: 2032
+  - label: "Tuckerman Ravine Jct"
+    elevationFt: 3800
+  - label: "Lion Head"
+    elevationFt: 4900
+  - label: "Summit"
+    elevationFt: 6288
 summary: "Home to some of the worst recorded weather on Earth — this was less about elevation and more about proving I could move well in real winter conditions."
 ---
 

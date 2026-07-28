@@ -3,6 +3,7 @@ title: "Iztaccíhuatl — La Arista del Sol (Ayoloco)"
 mountain: "Iztaccíhuatl"
 elevationFt: 17159
 elevationM: 5230
+elevationGainFt: 4159
 region: "State of Mexico / Puebla, Mexico"
 status: "planned"
 date: 2026-11-11 # TODO: confirm target date
@@ -10,6 +11,13 @@ difficulty: "Moderate / Difficult"
 route: "La Arista del Sol (Ayoloco Route)"
 coordinates: [19.1799, -98.6420]
 heroImage: "/images/climbs/iztaccihuatl.jpg"
+profile:
+  - label: "La Joya TH"
+    elevationFt: 13000
+  - label: "Ayoloco Hut"
+    elevationFt: 15090
+  - label: "Summit"
+    elevationFt: 17159
 summary: "The acclimatization climb before Orizaba — a dormant volcano whose profile is said to resemble a sleeping woman ('the White Woman')."
 ---
 

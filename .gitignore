@@ -20,5 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# Cloudflare Worker local state (cms-oauth-worker/)
+.wrangler/
+
 # jetbrains setting folder
 .idea/

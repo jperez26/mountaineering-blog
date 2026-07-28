@@ -10,6 +10,7 @@ Mountain photos are sourced from Wikimedia Commons under their original licenses
 | `public/images/climbs/rainier.jpg` | Mount Rainier, WA | Caleb Riston (FriendlyToaster) | CC0 (public domain) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Rainier20200906.jpg) |
 | `public/images/climbs/orizaba.jpg` | Pico de Orizaba, Mexico | México en Fotos | CC BY-SA 2.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Pico_de_Orizaba_desde_Hidalgo,_Puebla.jpg) |
 | `public/images/climbs/iztaccihuatl.jpg` | Iztaccíhuatl, Mexico | AlejandroLinaresGarcia | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:IztaccihualtSacromonte1.JPG) |
+| `public/images/climbs/kangchenjunga.jpg` | Kangchenjunga, Nepal/India | Tomabarker | CC BY 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Kangchenjunga_PangPema.JPG) |
 
 ## Gear photos
 

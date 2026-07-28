@@ -5,13 +5,13 @@
   --font-display: "Playfair Display", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
 
-  --color-summit-navy: #0f1b2e;
-  --color-summit-slate: #1e2f45;
-  --color-summit-ice: #7dd3fc;
-  --color-summit-glacier: #e0f2fe;
-  --color-summit-snow: #f8fafc;
-  --color-summit-ember: #f97316;
-  --color-summit-ember-dark: #c2410c;
+  --color-summit-forest: #182e21;
+  --color-summit-fern: #33513c;
+  --color-summit-moss: #b7d6a0;
+  --color-summit-mist: #eef2e4;
+  --color-summit-snow: #f8f6f0;
+  --color-summit-ember: #c8702f;
+  --color-summit-ember-dark: #97501f;
 }
 
 html {
@@ -21,7 +21,7 @@ html {
 body {
   font-family: var(--font-body);
   background-color: var(--color-summit-snow);
-  color: var(--color-summit-navy);
+  color: var(--color-summit-forest);
 }
 
 h1, h2, h3, h4, .font-display {
@@ -54,16 +54,16 @@ h1, h2, h3, h4, .font-display {
   background-image:
     repeating-radial-gradient(
       circle at 80% 70%,
-      rgba(224, 242, 254, 0.06) 0px,
+      rgba(238, 242, 228, 0.07) 0px,
       transparent 1px,
       transparent 26px,
-      rgba(224, 242, 254, 0.05) 27px,
+      rgba(238, 242, 228, 0.06) 27px,
       transparent 28px,
       transparent 54px,
-      rgba(224, 242, 254, 0.045) 55px,
+      rgba(238, 242, 228, 0.05) 55px,
       transparent 56px
     ),
-    linear-gradient(120deg, var(--color-summit-navy), var(--color-summit-slate), var(--color-summit-navy));
+    linear-gradient(120deg, var(--color-summit-forest), var(--color-summit-fern), var(--color-summit-forest));
   background-size: 240px 240px, 200% 200%;
   animation: drift-gradient 18s ease infinite;
 }
@@ -90,7 +90,7 @@ h1, h2, h3, h4, .font-display {
   bottom: 0;
   height: 2px;
   width: 0;
-  background: var(--color-summit-ice);
+  background: var(--color-summit-moss);
   transition: width 0.25s ease;
 }
 .nav-link:hover::after,
@@ -103,7 +103,7 @@ h1, h2, h3, h4, .font-display {
 }
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 35px -15px rgba(15, 27, 46, 0.35);
+  box-shadow: 0 20px 35px -15px rgba(24, 46, 33, 0.35);
 }
 
 /* Subtle topographic-contour texture — used behind light and dark sections
@@ -111,13 +111,13 @@ h1, h2, h3, h4, .font-display {
 .topo-bg {
   background-image: repeating-radial-gradient(
     circle at 15% 20%,
-    rgba(15, 27, 46, 0.055) 0px,
+    rgba(24, 46, 33, 0.055) 0px,
     transparent 1px,
     transparent 26px,
-    rgba(15, 27, 46, 0.05) 27px,
+    rgba(24, 46, 33, 0.05) 27px,
     transparent 28px,
     transparent 54px,
-    rgba(15, 27, 46, 0.04) 55px,
+    rgba(24, 46, 33, 0.04) 55px,
     transparent 56px
   );
   background-size: 240px 240px;
@@ -125,13 +125,13 @@ h1, h2, h3, h4, .font-display {
 .topo-bg-dark {
   background-image: repeating-radial-gradient(
     circle at 80% 70%,
-    rgba(224, 242, 254, 0.07) 0px,
+    rgba(238, 242, 228, 0.07) 0px,
     transparent 1px,
     transparent 26px,
-    rgba(224, 242, 254, 0.06) 27px,
+    rgba(238, 242, 228, 0.06) 27px,
     transparent 28px,
     transparent 54px,
-    rgba(224, 242, 254, 0.05) 55px,
+    rgba(238, 242, 228, 0.05) 55px,
     transparent 56px
   );
   background-size: 240px 240px;
@@ -165,7 +165,7 @@ h1, h2, h3, h4, .font-display {
   display: none;
   align-items: center;
   justify-content: center;
-  background: rgba(15, 27, 46, 0.92);
+  background: rgba(24, 46, 33, 0.92);
   padding: 1.5rem;
 }
 #lightbox.open {

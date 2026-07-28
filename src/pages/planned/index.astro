@@ -5,7 +5,7 @@ import ClimbCard from '../../components/ClimbCard.astro';
 import { getCollection } from 'astro:content';
 
 const climbs = (await getCollection('climbs', ({ data }) => !data.draft && data.status === 'planned')).sort(
-  (a, b) => a.data.date.valueOf() - b.data.date.valueOf()
+  (a, b) => (a.data.date?.valueOf() ?? Infinity) - (b.data.date?.valueOf() ?? Infinity)
 );
 ---
 
@@ -16,6 +16,6 @@ const climbs = (await getCollection('climbs', ({ data }) => !data.draft && data.
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {climbs.map((climb) => <ClimbCard climb={climb} />)}
     </div>
-    {climbs.length === 0 && <p class="text-summit-slate/70">Nothing planned yet — add one in <code>src/content/climbs/</code> with <code>status: planned</code>.</p>}
+    {climbs.length === 0 && <p class="text-summit-fern/70">Nothing planned yet — add one in <code>src/content/climbs/</code> with <code>status: planned</code>.</p>}
   </section>
 </BaseLayout>

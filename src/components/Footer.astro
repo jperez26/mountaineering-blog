@@ -11,31 +11,31 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
   <div class="mx-auto max-w-6xl px-4 sm:px-6 py-10 grid gap-8 sm:grid-cols-3">
     <div>
       <p class="font-display text-lg font-bold">{siteTitle}</p>
-      <p class="mt-2 text-sm text-summit-glacier/80">
+      <p class="mt-2 text-sm text-summit-mist/80">
         A running record of summits climbed, summits planned, and everything it takes to get up there.
       </p>
     </div>
 
     <div class="text-sm">
-      <p class="font-semibold text-summit-ice">Explore</p>
-      <ul class="mt-2 space-y-1 text-summit-glacier/80">
-        <li><a href={withBase('/summits')} class="hover:text-summit-ice">Past Summits</a></li>
-        <li><a href={withBase('/planned')} class="hover:text-summit-ice">Planned Trips</a></li>
-        <li><a href={withBase('/timeline')} class="hover:text-summit-ice">Timeline</a></li>
-        <li><a href={withBase('/map')} class="hover:text-summit-ice">Map</a></li>
+      <p class="font-semibold text-summit-moss">Explore</p>
+      <ul class="mt-2 space-y-1 text-summit-mist/80">
+        <li><a href={withBase('/summits')} class="hover:text-summit-moss">Past Summits</a></li>
+        <li><a href={withBase('/planned')} class="hover:text-summit-moss">Planned Trips</a></li>
+        <li><a href={withBase('/timeline')} class="hover:text-summit-moss">Timeline</a></li>
+        <li><a href={withBase('/map')} class="hover:text-summit-moss">Map</a></li>
       </ul>
     </div>
 
     <div class="text-sm">
-      <p class="font-semibold text-summit-ice">Gear &amp; Contact</p>
-      <ul class="mt-2 space-y-1 text-summit-glacier/80">
-        <li><a href={withBase('/gear')} class="hover:text-summit-ice">Gear Reviews</a></li>
-        <li><a href={withBase('/gear/guide')} class="hover:text-summit-ice">Buying Guide</a></li>
-        <li><a href={withBase('/contact')} class="hover:text-summit-ice">Get in Touch</a></li>
+      <p class="font-semibold text-summit-moss">Gear &amp; Contact</p>
+      <ul class="mt-2 space-y-1 text-summit-mist/80">
+        <li><a href={withBase('/gear')} class="hover:text-summit-moss">Gear Reviews</a></li>
+        <li><a href={withBase('/gear/guide')} class="hover:text-summit-moss">Buying Guide</a></li>
+        <li><a href={withBase('/contact')} class="hover:text-summit-moss">Get in Touch</a></li>
       </ul>
     </div>
   </div>
-  <div class="border-t border-white/10 py-4 text-center text-xs text-summit-glacier/60">
+  <div class="border-t border-white/10 py-4 text-center text-xs text-summit-mist/60">
     © {year} {siteTitle}. Built with Astro — replace this footer's placeholder text any time in <code>src/components/Footer.astro</code>.
   </div>
 </footer>

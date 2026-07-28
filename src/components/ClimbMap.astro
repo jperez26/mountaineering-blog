@@ -36,14 +36,14 @@ const mapId = `map-${Math.random().toString(36).slice(2, 9)}`;
       }).addTo(map);
 
       const markers = points.map((p) => {
-        const color = p.status === 'completed' ? '#22c55e' : '#38bdf8';
+        const color = p.status === 'completed' ? '#4d8f5e' : '#c8702f';
         const icon = L.divIcon({
           className: '',
           html: `<span style="background:${color};width:14px;height:14px;display:block;border-radius:50%;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.5)"></span>`,
           iconSize: [14, 14],
         });
         const marker = L.marker([p.lat, p.lng], { icon }).addTo(map);
-        marker.bindPopup(`<a href="${p.href}" style="font-weight:600;color:#0f1b2e">${p.title}</a>`);
+        marker.bindPopup(`<a href="${p.href}" style="font-weight:600;color:#182e21">${p.title}</a>`);
         return marker;
       });
 

@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import ClimbMap from '../../components/ClimbMap.astro';
+import ElevationProfile from '../../components/ElevationProfile.astro';
+import WeatherWidget from '../../components/WeatherWidget.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -19,8 +21,9 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
 
 const facts = [
   { label: 'Elevation', value: `${data.elevationFt.toLocaleString()} ft${data.elevationM ? ` (${data.elevationM.toLocaleString()} m)` : ''}` },
+  ...(data.elevationGainFt ? [{ label: 'Elevation Gain', value: `${data.elevationGainFt.toLocaleString()} ft` }] : []),
   { label: 'Region', value: data.region },
-  { label: 'Date', value: data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) },
+  { label: 'Date', value: data.date ? data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Unknown' },
   ...(data.difficulty ? [{ label: 'Difficulty', value: data.difficulty }] : []),
   ...(data.route ? [{ label: 'Route', value: data.route }] : []),
 ];
@@ -32,25 +35,37 @@ const facts = [
   <section class="mx-auto max-w-4xl px-4 sm:px-6 py-20 reveal">
     <div class="grid gap-4 sm:grid-cols-3 mb-10">
       {facts.map((f) => (
-        <div class="rounded-xl bg-white shadow-sm ring-1 ring-summit-slate/10 px-4 py-3">
-          <p class="text-xs uppercase tracking-wide text-summit-slate/60">{f.label}</p>
-          <p class="font-semibold text-summit-navy">{f.value}</p>
+        <div class="rounded-xl bg-white shadow-sm ring-1 ring-summit-fern/10 px-4 py-3">
+          <p class="text-xs uppercase tracking-wide text-summit-fern/60">{f.label}</p>
+          <p class="font-semibold text-summit-forest">{f.value}</p>
         </div>
       ))}
     </div>
 
-    <p class="text-lg text-summit-slate/90 italic border-l-4 border-summit-ember pl-4">{data.summary}</p>
+    {data.coordinates && (
+      <div class="mb-10">
+        <WeatherWidget lat={data.coordinates[0]} lng={data.coordinates[1]} mountain={data.mountain} />
+      </div>
+    )}
+
+    <p class="text-lg text-summit-fern/90 italic border-l-4 border-summit-ember pl-4">{data.summary}</p>
 
     <div class="prose prose-slate mt-8 max-w-none prose-headings:font-display prose-a:text-summit-ember-dark">
       <Content />
     </div>
 
+    {data.profile && data.profile.length > 1 && (
+      <div class="mt-10">
+        <ElevationProfile profile={data.profile} gainFt={data.elevationGainFt} />
+      </div>
+    )}
+
     {data.gallery && data.gallery.length > 0 && (
       <div class="mt-10">
-        <h2 class="font-display text-2xl font-bold text-summit-navy mb-4">Photos</h2>
+        <h2 class="font-display text-2xl font-bold text-summit-forest mb-4">Photos</h2>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {data.gallery.map((img) => (
-            <button data-lightbox={withBase(img)} data-alt={data.title} class="block overflow-hidden rounded-xl h-32 sm:h-40 w-full ring-1 ring-summit-slate/10">
+            <button data-lightbox={withBase(img)} data-alt={data.title} class="block overflow-hidden rounded-xl h-32 sm:h-40 w-full ring-1 ring-summit-fern/10">
               <img src={withBase(img)} alt={data.title} class="h-full w-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
             </button>
           ))}
@@ -60,7 +75,7 @@ const facts = [
 
     {data.coordinates && (
       <div class="mt-10">
-        <h2 class="font-display text-2xl font-bold text-summit-navy mb-4">Location</h2>
+        <h2 class="font-display text-2xl font-bold text-summit-forest mb-4">Location</h2>
         <ClimbMap
           height="320px"
           points={[{ lat: data.coordinates[0], lng: data.coordinates[1], title: data.mountain, href: `/summits/${id}`, status: data.status }]}
