@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+
+// Set this once you create a free Formspree account (see SETUP.md) —
+// replace YOUR_FORM_ID with the ID Formspree gives you.
+const FORMSPREE_ID = 'YOUR_FORM_ID';
+const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
+const isConfigured = FORMSPREE_ID !== 'YOUR_FORM_ID';
+const contactEmail = 'you@example.com';
+---
+
+<BaseLayout title="Contact" description="Get in touch.">
+  <Hero image="/images/placeholders/forest.svg" title="Get in Touch" subtitle="Questions about a route, gear, or just want to say hi?" size="md" />
+
+  <section class="mx-auto max-w-2xl px-4 sm:px-6 py-16">
+    {!isConfigured && (
+      <div class="mb-8 rounded-xl border border-summit-ember/40 bg-orange-50 px-5 py-4 text-sm text-summit-navy">
+        <strong>Heads up:</strong> this form isn't wired up yet. Create a free account at
+        <a href="https://formspree.io" target="_blank" rel="noopener" class="underline font-semibold">formspree.io</a>,
+        grab your form ID, and replace <code>YOUR_FORM_ID</code> in <code>src/pages/contact.astro</code>. Full steps are in
+        <code>SETUP.md</code>. Until then, reach out directly at
+        <a href={`mailto:${contactEmail}`} class="underline font-semibold">{contactEmail}</a>.
+      </div>
+    )}
+
+    <form action={formAction} method="POST" class="space-y-5">
+      <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+
+      <div>
+        <label for="name" class="block text-sm font-semibold text-summit-navy">Name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          class="mt-1 w-full rounded-lg border border-summit-slate/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-ice"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-semibold text-summit-navy">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          class="mt-1 w-full rounded-lg border border-summit-slate/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-ice"
+        />
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-semibold text-summit-navy">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          class="mt-1 w-full rounded-lg border border-summit-slate/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-ice"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="rounded-full bg-summit-ember px-6 py-3 font-semibold text-summit-navy hover:bg-orange-400 transition-colors"
+      >
+        Send Message
+      </button>
+    </form>
+  </section>
+</BaseLayout>

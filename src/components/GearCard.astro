@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  gear: CollectionEntry<'gear'>;
+}
+const { gear } = Astro.props;
+const { data, id } = gear;
+const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
+const image = data.image || '/images/placeholders/gear-neutral.svg';
+---
+
+<a href={withBase(`/gear/${id}`)} class="group block overflow-hidden rounded-xl bg-white shadow-md card-hover">
+  <div class="relative h-44 overflow-hidden bg-summit-glacier">
+    <img src={withBase(image)} alt={data.item} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+  </div>
+  <div class="p-5">
+    <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark">{data.category}</p>
+    <h3 class="mt-1 font-display text-lg font-bold text-summit-navy">{data.item}</h3>
+    {data.brand && <p class="text-sm text-summit-slate/70">{data.brand}</p>}
+    <div class="mt-2 flex items-center gap-1" aria-label={`${data.rating} out of 5 stars`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg class:list={['h-4 w-4', i < data.rating ? 'text-summit-ember' : 'text-summit-slate/20']} viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 1l2.9 6 6.6.6-5 4.5 1.5 6.5-6-3.6-6 3.6 1.5-6.5-5-4.5 6.6-.6z" />
+        </svg>
+      ))}
+    </div>
+  </div>
+</a>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ClimbCard from '../../components/ClimbCard.astro';
+import { getCollection } from 'astro:content';
+
+const climbs = (await getCollection('climbs', ({ data }) => !data.draft && data.status === 'completed')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<BaseLayout title="Past Summits" description="Every peak I've stood on top of, in one place.">
+  <Hero image="/images/placeholders/dusk.svg" title="Past Summits" subtitle="Every peak I've stood on top of, in one place." size="md" />
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {climbs.map((climb) => <ClimbCard climb={climb} />)}
+    </div>
+    {climbs.length === 0 && <p class="text-summit-slate/70">No summits logged yet — add one in <code>src/content/climbs/</code> with <code>status: completed</code>.</p>}
+  </section>
+</BaseLayout>

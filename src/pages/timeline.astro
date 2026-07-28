@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import { getCollection } from 'astro:content';
+
+const climbs = await getCollection('climbs', ({ data }) => !data.draft);
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+
+const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
+
+const events = [
+  ...climbs.map((c) => ({
+    date: c.data.date,
+    kind: c.data.status === 'completed' ? 'summit' : 'planned',
+    title: c.data.mountain,
+    detail: c.data.summary,
+    href: c.data.status === 'completed' ? `/summits/${c.id}` : `/planned/${c.id}`,
+  })),
+  ...posts.map((p) => ({
+    date: p.data.date,
+    kind: 'post',
+    title: p.data.title,
+    detail: p.data.excerpt,
+    href: `/blog/${p.id}`,
+  })),
+].sort((a, b) => a.date.valueOf() - b.date.valueOf());
+
+const kindStyles = {
+  summit: { dot: 'bg-summit-ice', label: 'Summit', badge: 'bg-summit-ice text-summit-navy' },
+  planned: { dot: 'bg-summit-ember', label: 'Planned', badge: 'bg-summit-ember text-summit-navy' },
+  post: { dot: 'bg-summit-slate', label: 'Journal', badge: 'bg-summit-slate text-summit-snow' },
+};
+---
+
+<BaseLayout title="Timeline" description="The whole journey, in order.">
+  <Hero image="/images/placeholders/alpine-lake.svg" title="Timeline" subtitle="Every summit, plan, and journal entry, laid out in order." size="md" />
+
+  <section class="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+    <div class="relative border-l-2 border-summit-slate/15 pl-8 space-y-10">
+      {events.map((event) => {
+        const style = kindStyles[event.kind as keyof typeof kindStyles];
+        return (
+          <div class="relative">
+            <span class={`absolute -left-[2.55rem] top-1 h-4 w-4 rounded-full border-2 border-summit-snow ${style.dot}`}></span>
+            <p class="text-xs font-semibold uppercase tracking-wide text-summit-slate/60">
+              {event.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
+            </p>
+            <a href={withBase(event.href)} class="group block mt-1">
+              <span class={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold mb-1 ${style.badge}`}>{style.label}</span>
+              <h3 class="font-display text-xl font-bold text-summit-navy group-hover:text-summit-ember-dark transition-colors">{event.title}</h3>
+              <p class="text-summit-slate/80 mt-1 line-clamp-2">{event.detail}</p>
+            </a>
+          </div>
+        );
+      })}
+      {events.length === 0 && <p class="text-summit-slate/70">Nothing to show yet — add climbs or blog posts to see them here.</p>}
+    </div>
+  </section>
+</BaseLayout>

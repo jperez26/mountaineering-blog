@@ -1,0 +1,92 @@
+---
+interface Props {
+  siteTitle: string;
+}
+const { siteTitle } = Astro.props;
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/summits', label: 'Summits' },
+  { href: '/planned', label: 'Planned Trips' },
+  { href: '/timeline', label: 'Timeline' },
+  { href: '/map', label: 'Map' },
+];
+
+const gearLinks = [
+  { href: '/gear', label: 'Gear Reviews' },
+  { href: '/gear/guide', label: 'Buying Guide' },
+];
+
+const path = new URL(Astro.request.url).pathname;
+const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
+---
+
+<header class="sticky top-0 z-50 bg-summit-navy text-summit-snow shadow-lg">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="flex h-16 items-center justify-between">
+      <a href={withBase('/')} class="font-display text-xl font-bold tracking-wide">
+        {siteTitle}
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold">
+        {links.map((link) => (
+          <a
+            href={withBase(link.href)}
+            class:list={[
+              'transition-colors hover:text-summit-ice',
+              path === link.href || (link.href !== '/' && path.startsWith(link.href)) ? 'text-summit-ice' : 'text-summit-snow',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+
+        <div class="relative group">
+          <button class="flex items-center gap-1 transition-colors hover:text-summit-ice">
+            Gear
+            <svg class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5.5 7.5l4.5 5 4.5-5z" /></svg>
+          </button>
+          <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block pt-2 min-w-[10rem]">
+            <div class="rounded-lg bg-summit-slate shadow-xl overflow-hidden">
+              {gearLinks.map((link) => (
+                <a href={withBase(link.href)} class="block px-4 py-2 text-sm hover:bg-summit-navy hover:text-summit-ice">
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <a href={withBase('/gallery')} class="transition-colors hover:text-summit-ice">Gallery</a>
+        <a
+          href={withBase('/contact')}
+          class="rounded-full bg-summit-ember px-4 py-2 text-summit-navy hover:bg-orange-400 transition-colors"
+        >
+          Contact
+        </a>
+      </nav>
+
+      <button id="menu-toggle" class="lg:hidden p-2" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <nav id="mobile-menu" class="hidden lg:hidden pb-4 flex flex-col gap-3 text-sm font-semibold">
+      {[...links, ...gearLinks, { href: '/gallery', label: 'Gallery' }, { href: '/contact', label: 'Contact' }].map((link) => (
+        <a href={withBase(link.href)} class="py-1 hover:text-summit-ice">{link.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+</script>

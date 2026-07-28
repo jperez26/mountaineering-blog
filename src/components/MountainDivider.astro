@@ -1,0 +1,15 @@
+---
+interface Props {
+  flip?: boolean;
+  color?: string;
+}
+const { flip = false, color = '#0f1b2e' } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 1600 120"
+  class:list={['block w-full h-16', flip ? 'rotate-180' : '']}
+  preserveAspectRatio="none"
+>
+  <polygon points="0,120 0,60 200,20 420,80 660,10 900,70 1150,30 1350,90 1600,40 1600,120" fill={color} />
+</svg>

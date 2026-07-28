@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ClimbMap from '../components/ClimbMap.astro';
+import { getCollection } from 'astro:content';
+
+const climbs = await getCollection('climbs', ({ data }) => !data.draft && Boolean(data.coordinates));
+
+const points = climbs.map((c) => ({
+  lat: c.data.coordinates![0],
+  lng: c.data.coordinates![1],
+  title: c.data.mountain,
+  href: c.data.status === 'completed' ? `/summits/${c.id}` : `/planned/${c.id}`,
+  status: c.data.status,
+}));
+---
+
+<BaseLayout title="Map" description="Every summit and planned trip, plotted on one map.">
+  <Hero image="/images/placeholders/dusk.svg" title="The Map" subtitle="Green pins are summited. Blue pins are next up." size="md" />
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+    <div class="mb-4 flex gap-6 text-sm font-semibold text-summit-slate/80">
+      <span class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-green-500 border border-white shadow"></span> Summited</span>
+      <span class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-summit-ice border border-white shadow"></span> Planned</span>
+    </div>
+    <ClimbMap points={points} height="60vh" />
+    {points.length === 0 && <p class="mt-4 text-summit-slate/70">No coordinates yet — add a <code>coordinates: [lat, lng]</code> field to a climb.</p>}
+  </section>
+</BaseLayout>

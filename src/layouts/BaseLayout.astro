@@ -1,0 +1,61 @@
+---
+import '@fontsource/playfair-display/500.css';
+import '@fontsource/playfair-display/700.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/600.css';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Summit log, gear notes, and trip plans from the mountains.' } = Astro.props;
+const siteTitle = 'Summit Journal';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <title>{title} · {siteTitle}</title>
+  </head>
+  <body class="min-h-screen flex flex-col bg-summit-snow text-summit-navy font-body">
+    <Nav siteTitle={siteTitle} />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer siteTitle={siteTitle} />
+
+    <!-- Shared lightbox target, used by the Gallery page -->
+    <div id="lightbox" aria-hidden="true">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+    <script>
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement | null;
+
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const trigger = target.closest('[data-lightbox]') as HTMLElement | null;
+        if (trigger && lightbox && lightboxImg) {
+          lightboxImg.src = trigger.getAttribute('data-lightbox') || '';
+          lightboxImg.alt = trigger.getAttribute('data-alt') || '';
+          lightbox.classList.add('open');
+        }
+        if (target === lightbox) {
+          lightbox?.classList.remove('open');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') lightbox?.classList.remove('open');
+      });
+    </script>
+  </body>
+</html>

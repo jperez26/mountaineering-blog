@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --color-summit-navy: #0f1b2e;
+  --color-summit-slate: #1e2f45;
+  --color-summit-ice: #7dd3fc;
+  --color-summit-glacier: #e0f2fe;
+  --color-summit-snow: #f8fafc;
+  --color-summit-ember: #f97316;
+  --color-summit-ember-dark: #c2410c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-summit-snow);
+  color: var(--color-summit-navy);
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+}
+
+/* Slow pan/zoom on hero background photos ("dynamic background") */
+@keyframes ken-burns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1.5%, -1.5%); }
+}
+
+.hero-bg {
+  animation: ken-burns 24s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg {
+    animation: none;
+  }
+}
+
+/* Slow-drifting gradient used behind content sections for an alpine "sky" feel */
+@keyframes drift-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.drift-gradient {
+  background: linear-gradient(120deg, var(--color-summit-navy), var(--color-summit-slate), var(--color-summit-navy));
+  background-size: 200% 200%;
+  animation: drift-gradient 18s ease infinite;
+}
+
+/* Star/snow speckle used sparingly on dark hero sections */
+.speckle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -15px rgba(15, 27, 46, 0.35);
+}
+
+/* Lightbox (used on the Gallery page) */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 27, 46, 0.92);
+  padding: 1.5rem;
+}
+#lightbox.open {
+  display: flex;
+}
+#lightbox img {
+  max-height: 90vh;
+  max-width: 90vw;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}

@@ -1,0 +1,12 @@
+---
+interface Props {
+  value: string;
+  label: string;
+}
+const { value, label } = Astro.props;
+---
+
+<div class="rounded-xl bg-summit-slate/5 border border-summit-slate/10 px-6 py-5 text-center card-hover">
+  <p class="font-display text-3xl sm:text-4xl font-bold text-summit-navy">{value}</p>
+  <p class="mt-1 text-sm uppercase tracking-wide text-summit-slate/70">{label}</p>
+</div>

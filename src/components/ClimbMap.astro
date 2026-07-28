@@ -1,0 +1,62 @@
+---
+export interface MapPoint {
+  lat: number;
+  lng: number;
+  title: string;
+  href: string;
+  status: 'completed' | 'planned';
+}
+interface Props {
+  points: MapPoint[];
+  height?: string;
+}
+const { points, height = '500px' } = Astro.props;
+const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
+const resolvedPoints = points.map((p) => ({ ...p, href: withBase(p.href) }));
+const mapId = `map-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div id={mapId} class="climb-map w-full rounded-xl z-0" style={`height: ${height}`} data-points={JSON.stringify(resolvedPoints)}></div>
+
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+
+  function initMaps() {
+    document.querySelectorAll('.climb-map').forEach((el) => {
+      if (el.dataset.initialized) return;
+      const points = JSON.parse(el.getAttribute('data-points') || '[]');
+      if (!points.length) return;
+      el.dataset.initialized = 'true';
+
+      const map = L.map(el, { scrollWheelZoom: false });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+      }).addTo(map);
+
+      const markers = points.map((p) => {
+        const color = p.status === 'completed' ? '#22c55e' : '#38bdf8';
+        const icon = L.divIcon({
+          className: '',
+          html: `<span style="background:${color};width:14px;height:14px;display:block;border-radius:50%;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.5)"></span>`,
+          iconSize: [14, 14],
+        });
+        const marker = L.marker([p.lat, p.lng], { icon }).addTo(map);
+        marker.bindPopup(`<a href="${p.href}" style="font-weight:600;color:#0f1b2e">${p.title}</a>`);
+        return marker;
+      });
+
+      if (markers.length > 1) {
+        map.fitBounds(L.featureGroup(markers).getBounds(), { padding: [40, 40] });
+      } else if (markers.length === 1) {
+        map.setView([points[0].lat, points[0].lng], 9);
+      } else {
+        map.setView([20, 0], 2);
+      }
+    });
+  }
+
+  initMaps();
+  document.addEventListener('astro:page-load', initMaps);
+</script>

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import { getCollection } from 'astro:content';
+
+const climbs = await getCollection('climbs', ({ data }) => !data.draft);
+
+const photos = climbs.flatMap((c) => {
+  const images = new Set<string>();
+  if (c.data.heroImage) images.add(c.data.heroImage);
+  (c.data.gallery || []).forEach((img) => images.add(img));
+  return Array.from(images).map((src) => ({ src, alt: c.data.mountain }));
+});
+
+const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
+---
+
+<BaseLayout title="Gallery" description="Photos from every trip, in one grid.">
+  <Hero image="/images/placeholders/alpine-lake.svg" title="Gallery" subtitle="Every trip, in pictures. Click any photo to zoom in." size="md" />
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+      {photos.map((photo) => (
+        <button
+          data-lightbox={withBase(photo.src)}
+          data-alt={photo.alt}
+          class="group block overflow-hidden rounded-lg h-40 sm:h-48 w-full"
+        >
+          <img
+            src={withBase(photo.src)}
+            alt={photo.alt}
+            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+            loading="lazy"
+          />
+        </button>
+      ))}
+    </div>
+    {photos.length === 0 && <p class="text-summit-slate/70">No photos yet — add a <code>heroImage</code> or <code>gallery</code> field to a climb.</p>}
+  </section>
+</BaseLayout>

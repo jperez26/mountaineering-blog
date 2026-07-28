@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ClimbMap from '../../components/ClimbMap.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const climbs = await getCollection('climbs', ({ data }) => !data.draft && data.status === 'planned');
+  return climbs.map((climb) => ({
+    params: { slug: climb.id },
+    props: { climb },
+  }));
+}
+
+const { climb } = Astro.props;
+const { data, id } = climb;
+const { Content } = await render(climb);
+const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
+
+const facts = [
+  { label: 'Elevation', value: `${data.elevationFt.toLocaleString()} ft${data.elevationM ? ` (${data.elevationM.toLocaleString()} m)` : ''}` },
+  { label: 'Region', value: data.region },
+  { label: 'Target Date', value: data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) },
+  ...(data.difficulty ? [{ label: 'Difficulty', value: data.difficulty }] : []),
+  ...(data.route ? [{ label: 'Planned Route', value: data.route }] : []),
+];
+---
+
+<BaseLayout title={data.title} description={data.summary}>
+  <Hero image={data.heroImage || '/images/placeholders/forest.svg'} title={data.mountain} subtitle={data.title} />
+
+  <section class="mx-auto max-w-4xl px-4 sm:px-6 py-16">
+    <div class="grid gap-4 sm:grid-cols-3 mb-10">
+      {facts.map((f) => (
+        <div class="rounded-xl bg-summit-slate/5 border border-summit-slate/10 px-4 py-3">
+          <p class="text-xs uppercase tracking-wide text-summit-slate/60">{f.label}</p>
+          <p class="font-semibold text-summit-navy">{f.value}</p>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-lg text-summit-slate/90 italic border-l-4 border-summit-ice pl-4">{data.summary}</p>
+
+    <div class="prose prose-slate mt-8 max-w-none prose-headings:font-display prose-a:text-summit-ember-dark">
+      <Content />
+    </div>
+
+    {data.coordinates && (
+      <div class="mt-10">
+        <h2 class="font-display text-2xl font-bold text-summit-navy mb-4">Location</h2>
+        <ClimbMap
+          height="320px"
+          points={[{ lat: data.coordinates[0], lng: data.coordinates[1], title: data.mountain, href: `/planned/${id}`, status: data.status }]}
+        />
+      </div>
+    )}
+
+    <a href={withBase('/planned')} class="mt-10 inline-block text-sm font-semibold text-summit-ember-dark hover:underline">← Back to Planned Trips</a>
+  </section>
+</BaseLayout>

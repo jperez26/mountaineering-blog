@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#030712"/>
+      <stop offset="55%" stop-color="#1e2f45"/>
+      <stop offset="100%" stop-color="#7dd3fc"/>
+    </linearGradient>
+    <linearGradient id="m1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e2f45"/>
+      <stop offset="100%" stop-color="#0f1b2e"/>
+    </linearGradient>
+    <linearGradient id="m2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f1b2e"/>
+      <stop offset="100%" stop-color="#020408"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <circle cx="1400" cy="150" r="3" fill="#fff" opacity="0.8"/>
+  <circle cx="1300" cy="220" r="2" fill="#fff" opacity="0.6"/>
+  <circle cx="1480" cy="260" r="2" fill="#fff" opacity="0.7"/>
+  <circle cx="200" cy="120" r="2" fill="#fff" opacity="0.6"/>
+  <circle cx="120" cy="240" r="3" fill="#fff" opacity="0.7"/>
+  <polygon points="0,600 300,300 520,540 760,240 1000,580 1250,360 1600,540 1600,900 0,900" fill="url(#m2)"/>
+  <polygon points="0,720 260,500 480,660 700,420 940,700 1160,480 1400,660 1600,560 1600,900 0,900" fill="url(#m1)"/>
+  <polygon points="270,410 300,300 340,420" fill="#e0f2fe" opacity="0.9"/>
+  <polygon points="730,330 760,240 790,340" fill="#e0f2fe" opacity="0.9"/>
+</svg>

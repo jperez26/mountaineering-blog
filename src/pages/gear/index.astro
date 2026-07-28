@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import GearCard from '../../components/GearCard.astro';
+import { getCollection } from 'astro:content';
+
+const gear = (await getCollection('gear', ({ data }) => !data.draft)).sort((a, b) => b.data.rating - a.data.rating);
+const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
+---
+
+<BaseLayout title="Gear Reviews" description="Field notes on the gear I actually use.">
+  <Hero image="/images/placeholders/gear-neutral.svg" title="Gear Reviews" subtitle="Real field notes — what earned its place in the pack and what didn't." size="md" />
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+    <div class="mb-6 flex justify-end">
+      <a href={withBase('/gear/guide')} class="text-sm font-semibold text-summit-ember-dark hover:underline">Need a full packing list by elevation? →</a>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {gear.map((item) => <GearCard gear={item} />)}
+    </div>
+    {gear.length === 0 && <p class="text-summit-slate/70">No reviews yet — add one in <code>src/content/gear/</code>.</p>}
+  </section>
+</BaseLayout>

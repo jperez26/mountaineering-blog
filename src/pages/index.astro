@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import StatCard from '../components/StatCard.astro';
+import ClimbCard from '../components/ClimbCard.astro';
+import MountainDivider from '../components/MountainDivider.astro';
+import { getCollection } from 'astro:content';
+
+const allClimbs = await getCollection('climbs', ({ data }) => !data.draft);
+const completed = allClimbs.filter((c) => c.data.status === 'completed').sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const planned = allClimbs.filter((c) => c.data.status === 'planned').sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+
+const highestFt = completed.reduce((max, c) => Math.max(max, c.data.elevationFt), 0);
+const combinedFt = completed.reduce((sum, c) => sum + c.data.elevationFt, 0);
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
+---
+
+<BaseLayout title="Home">
+  <Hero
+    image="/images/placeholders/sunrise.svg"
+    title="Every Summit Starts as a Line on a Map"
+    subtitle="A running log of the peaks I've climbed, the ones I'm planning, and everything in between."
+  >
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href={withBase('/summits')} class="rounded-full bg-summit-ember px-6 py-3 font-semibold text-summit-navy hover:bg-orange-400 transition-colors">
+        See Past Summits
+      </a>
+      <a href={withBase('/planned')} class="rounded-full border border-summit-snow/40 px-6 py-3 font-semibold text-summit-snow hover:bg-white/10 transition-colors">
+        See What's Next
+      </a>
+    </div>
+  </Hero>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 -mt-10 relative z-10">
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <StatCard value={String(completed.length)} label="Peaks Summited" />
+      <StatCard value={highestFt ? `${highestFt.toLocaleString()} ft` : '—'} label="Highest Summit" />
+      <StatCard value={String(planned.length)} label="Trips Planned" />
+      <StatCard value={combinedFt ? `${combinedFt.toLocaleString()} ft` : '—'} label="Combined Summit Elevation" />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 mt-16">
+    <div class="flex items-baseline justify-between">
+      <h2 class="text-2xl sm:text-3xl font-bold text-summit-navy">Recent Summits</h2>
+      <a href={withBase('/summits')} class="text-sm font-semibold text-summit-ember-dark hover:underline">View all →</a>
+    </div>
+    <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {completed.slice(0, 3).map((climb) => <ClimbCard climb={climb} />)}
+    </div>
+  </section>
+
+  <MountainDivider color="#0f1b2e" />
+
+  <section class="drift-gradient text-summit-snow py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-2xl sm:text-3xl font-bold">Up Next</h2>
+        <a href={withBase('/planned')} class="text-sm font-semibold text-summit-ice hover:underline">View all →</a>
+      </div>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {planned.slice(0, 3).map((climb) => <ClimbCard climb={climb} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+    <div class="flex items-baseline justify-between">
+      <h2 class="text-2xl sm:text-3xl font-bold text-summit-navy">Latest From the Blog</h2>
+      <a href={withBase('/blog')} class="text-sm font-semibold text-summit-ember-dark hover:underline">View all →</a>
+    </div>
+    <div class="mt-6 grid gap-6 sm:grid-cols-3">
+      {posts.map((post) => (
+        <a href={withBase(`/blog/${post.id}`)} class="group block overflow-hidden rounded-xl bg-white shadow-md card-hover">
+          <div class="h-40 overflow-hidden">
+            <img
+              src={withBase(post.data.heroImage || '/images/placeholders/snow.svg')}
+              alt={post.data.title}
+              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-5">
+            <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark">
+              {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </p>
+            <h3 class="mt-1 font-display text-lg font-bold text-summit-navy">{post.data.title}</h3>
+            <p class="mt-2 text-sm text-summit-slate/80 line-clamp-2">{post.data.excerpt}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
