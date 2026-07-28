@@ -27,12 +27,12 @@ const facts = [
 ---
 
 <BaseLayout title={data.title} description={data.summary}>
-  <Hero image={data.heroImage || '/images/placeholders/forest.svg'} title={data.mountain} subtitle={data.title} />
+  <Hero image={data.heroImage || '/images/placeholders/forest.svg'} eyebrow="Planned" title={data.mountain} subtitle={data.title} />
 
-  <section class="mx-auto max-w-4xl px-4 sm:px-6 py-16">
+  <section class="mx-auto max-w-4xl px-4 sm:px-6 py-20 reveal">
     <div class="grid gap-4 sm:grid-cols-3 mb-10">
       {facts.map((f) => (
-        <div class="rounded-xl bg-summit-slate/5 border border-summit-slate/10 px-4 py-3">
+        <div class="rounded-xl bg-white shadow-sm ring-1 ring-summit-slate/10 px-4 py-3">
           <p class="text-xs uppercase tracking-wide text-summit-slate/60">{f.label}</p>
           <p class="font-semibold text-summit-navy">{f.value}</p>
         </div>

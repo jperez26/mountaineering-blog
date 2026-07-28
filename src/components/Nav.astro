@@ -22,20 +22,20 @@ const path = new URL(Astro.request.url).pathname;
 const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
 ---
 
-<header class="sticky top-0 z-50 bg-summit-navy text-summit-snow shadow-lg">
+<header class="sticky top-0 z-50 bg-summit-navy/90 backdrop-blur-md text-summit-snow shadow-lg border-b border-white/5">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
     <div class="flex h-16 items-center justify-between">
       <a href={withBase('/')} class="font-display text-xl font-bold tracking-wide">
         {siteTitle}
       </a>
 
-      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold">
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold">
         {links.map((link) => (
           <a
             href={withBase(link.href)}
             class:list={[
-              'transition-colors hover:text-summit-ice',
-              path === link.href || (link.href !== '/' && path.startsWith(link.href)) ? 'text-summit-ice' : 'text-summit-snow',
+              'nav-link transition-colors hover:text-summit-ice',
+              path === link.href || (link.href !== '/' && path.startsWith(link.href)) ? 'active text-summit-ice' : 'text-summit-snow',
             ]}
           >
             {link.label}
@@ -43,14 +43,19 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
         ))}
 
         <div class="relative group">
-          <button class="flex items-center gap-1 transition-colors hover:text-summit-ice">
+          <button
+            class:list={[
+              'nav-link flex items-center gap-1 transition-colors hover:text-summit-ice',
+              path.startsWith('/gear') ? 'active text-summit-ice' : 'text-summit-snow',
+            ]}
+          >
             Gear
             <svg class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5.5 7.5l4.5 5 4.5-5z" /></svg>
           </button>
-          <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block pt-2 min-w-[10rem]">
-            <div class="rounded-lg bg-summit-slate shadow-xl overflow-hidden">
+          <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block pt-3 min-w-[11rem]">
+            <div class="rounded-lg bg-summit-slate shadow-2xl overflow-hidden border border-white/10">
               {gearLinks.map((link) => (
-                <a href={withBase(link.href)} class="block px-4 py-2 text-sm hover:bg-summit-navy hover:text-summit-ice">
+                <a href={withBase(link.href)} class="block px-4 py-2.5 text-sm hover:bg-summit-navy hover:text-summit-ice transition-colors">
                   {link.label}
                 </a>
               ))}
@@ -58,10 +63,15 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
           </div>
         </div>
 
-        <a href={withBase('/gallery')} class="transition-colors hover:text-summit-ice">Gallery</a>
+        <a
+          href={withBase('/gallery')}
+          class:list={['nav-link transition-colors hover:text-summit-ice', path.startsWith('/gallery') ? 'active text-summit-ice' : 'text-summit-snow']}
+        >
+          Gallery
+        </a>
         <a
           href={withBase('/contact')}
-          class="rounded-full bg-summit-ember px-4 py-2 text-summit-navy hover:bg-orange-400 transition-colors"
+          class="rounded-full bg-summit-ember px-5 py-2 text-summit-navy hover:bg-orange-400 hover:shadow-lg hover:shadow-orange-500/30 transition-all"
         >
           Contact
         </a>
@@ -74,10 +84,12 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
       </button>
     </div>
 
-    <nav id="mobile-menu" class="hidden lg:hidden pb-4 flex flex-col gap-3 text-sm font-semibold">
-      {[...links, ...gearLinks, { href: '/gallery', label: 'Gallery' }, { href: '/contact', label: 'Contact' }].map((link) => (
-        <a href={withBase(link.href)} class="py-1 hover:text-summit-ice">{link.label}</a>
-      ))}
+    <nav id="mobile-menu" class="lg:hidden max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out flex flex-col gap-1 text-sm font-semibold">
+      <div class="flex flex-col gap-1 pb-4 pt-1">
+        {[...links, ...gearLinks, { href: '/gallery', label: 'Gallery' }, { href: '/contact', label: 'Contact' }].map((link) => (
+          <a href={withBase(link.href)} class="py-2 border-b border-white/5 last:border-0 hover:text-summit-ice">{link.label}</a>
+        ))}
+      </div>
     </nav>
   </div>
 </header>
@@ -86,7 +98,9 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
   const toggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
   toggle?.addEventListener('click', () => {
-    const isOpen = menu?.classList.toggle('hidden') === false;
+    const isOpen = menu?.classList.contains('max-h-0');
+    menu?.classList.toggle('max-h-0', !isOpen);
+    menu?.classList.toggle('max-h-[28rem]', isOpen);
     toggle.setAttribute('aria-expanded', String(isOpen));
   });
 </script>

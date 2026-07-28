@@ -4,25 +4,34 @@ interface Props {
   title: string;
   subtitle?: string;
   size?: 'lg' | 'md';
+  eyebrow?: string;
 }
-const { image, title, subtitle, size = 'lg' } = Astro.props;
+const { image, title, subtitle, size = 'lg', eyebrow } = Astro.props;
 const withBase = (src: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + src;
-const heightClass = size === 'lg' ? 'h-[70vh] min-h-[420px]' : 'h-[38vh] min-h-[260px]';
+const heightClass = size === 'lg' ? 'h-[75vh] min-h-[480px]' : 'h-[42vh] min-h-[300px]';
 ---
 
 <section class={`relative ${heightClass} w-full overflow-hidden bg-summit-navy`}>
   <img
     src={withBase(image)}
     alt=""
-    class="hero-bg absolute inset-0 h-full w-full object-cover opacity-80"
+    class="hero-bg absolute inset-0 h-full w-full object-cover"
     loading="eager"
   />
-  <div class="absolute inset-0 bg-gradient-to-t from-summit-navy via-summit-navy/40 to-summit-navy/10"></div>
+  <!-- Flat tint everywhere, so text stays legible no matter how bright the
+       photo is, plus a directional gradient for extra depth at the edges. -->
+  <div class="absolute inset-0 bg-summit-navy/35"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-summit-navy/95 via-summit-navy/45 to-summit-navy/25"></div>
+  <div class="absolute inset-0 topo-bg-dark opacity-60"></div>
+
   <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-summit-snow">
-    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold drop-shadow-lg max-w-3xl">
+    {eyebrow && (
+      <p class="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-summit-ice">{eyebrow}</p>
+    )}
+    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold drop-shadow-lg max-w-3xl [text-shadow:0_2px_20px_rgba(0,0,0,0.5)]">
       {title}
     </h1>
-    {subtitle && <p class="mt-4 max-w-xl text-lg text-summit-glacier/90">{subtitle}</p>}
+    {subtitle && <p class="mt-4 max-w-xl text-lg text-summit-glacier/90 [text-shadow:0_1px_8px_rgba(0,0,0,0.4)]">{subtitle}</p>}
     <slot />
   </div>
 </section>

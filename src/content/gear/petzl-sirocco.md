@@ -9,7 +9,7 @@ pros:
   - "Good ventilation on long approaches"
 cons:
   - "Foam shell is more delicate than hardshell helmets"
-image: "/images/placeholders/gear-neutral.svg"
+image: "/images/gear/petzl-sirocco.jpg"
 elevationTags: ["all elevations"]
 ---
 

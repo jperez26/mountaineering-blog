@@ -10,9 +10,9 @@ const climbs = (await getCollection('climbs', ({ data }) => !data.draft && data.
 ---
 
 <BaseLayout title="Past Summits" description="Every peak I've stood on top of, in one place.">
-  <Hero image="/images/placeholders/dusk.svg" title="Past Summits" subtitle="Every peak I've stood on top of, in one place." size="md" />
+  <Hero image="/images/climbs/hood.jpg" eyebrow="The Record" title="Past Summits" subtitle="Every peak I've stood on top of, in one place." size="md" />
 
-  <section class="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 py-20 reveal">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {climbs.map((climb) => <ClimbCard climb={climb} />)}
     </div>

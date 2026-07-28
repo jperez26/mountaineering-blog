@@ -51,8 +51,20 @@ h1, h2, h3, h4, .font-display {
 }
 
 .drift-gradient {
-  background: linear-gradient(120deg, var(--color-summit-navy), var(--color-summit-slate), var(--color-summit-navy));
-  background-size: 200% 200%;
+  background-image:
+    repeating-radial-gradient(
+      circle at 80% 70%,
+      rgba(224, 242, 254, 0.06) 0px,
+      transparent 1px,
+      transparent 26px,
+      rgba(224, 242, 254, 0.05) 27px,
+      transparent 28px,
+      transparent 54px,
+      rgba(224, 242, 254, 0.045) 55px,
+      transparent 56px
+    ),
+    linear-gradient(120deg, var(--color-summit-navy), var(--color-summit-slate), var(--color-summit-navy));
+  background-size: 240px 240px, 200% 200%;
   animation: drift-gradient 18s ease infinite;
 }
 
@@ -67,12 +79,82 @@ h1, h2, h3, h4, .font-display {
   pointer-events: none;
 }
 
+.nav-link {
+  position: relative;
+  padding-bottom: 0.35rem;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: var(--color-summit-ice);
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
 .card-hover {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .card-hover:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 35px -15px rgba(15, 27, 46, 0.35);
+}
+
+/* Subtle topographic-contour texture — used behind light and dark sections
+   for a mapmaking/alpine feel instead of a flat fill. Pure CSS, no assets. */
+.topo-bg {
+  background-image: repeating-radial-gradient(
+    circle at 15% 20%,
+    rgba(15, 27, 46, 0.055) 0px,
+    transparent 1px,
+    transparent 26px,
+    rgba(15, 27, 46, 0.05) 27px,
+    transparent 28px,
+    transparent 54px,
+    rgba(15, 27, 46, 0.04) 55px,
+    transparent 56px
+  );
+  background-size: 240px 240px;
+}
+.topo-bg-dark {
+  background-image: repeating-radial-gradient(
+    circle at 80% 70%,
+    rgba(224, 242, 254, 0.07) 0px,
+    transparent 1px,
+    transparent 26px,
+    rgba(224, 242, 254, 0.06) 27px,
+    transparent 28px,
+    transparent 54px,
+    rgba(224, 242, 254, 0.05) 55px,
+    transparent 56px
+  );
+  background-size: 240px 240px;
+}
+
+/* Scroll-reveal: elements fade/rise in once tagged .is-visible by the
+   IntersectionObserver in BaseLayout. Falls back to fully visible if JS
+   never runs (progressive enhancement, not required for content access). */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Lightbox (used on the Gallery page) */

@@ -1,8 +1,8 @@
 ---
 title: "Why I Started Keeping a Summit Journal"
-date: 2024-01-05
+date: 2026-01-10
 tags: ["reflection", "mindset"]
-heroImage: "/images/placeholders/alpine-lake.svg"
+heroImage: "/images/climbs/washington.jpg"
 excerpt: "On turning a scattered pile of trip notes and phone photos into an actual record of the journey."
 ---
 

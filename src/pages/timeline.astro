@@ -33,9 +33,9 @@ const kindStyles = {
 ---
 
 <BaseLayout title="Timeline" description="The whole journey, in order.">
-  <Hero image="/images/placeholders/alpine-lake.svg" title="Timeline" subtitle="Every summit, plan, and journal entry, laid out in order." size="md" />
+  <Hero image="/images/climbs/iztaccihuatl.jpg" eyebrow="The Journey" title="Timeline" subtitle="Every summit, plan, and journal entry, laid out in order." size="md" />
 
-  <section class="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+  <section class="mx-auto max-w-3xl px-4 sm:px-6 py-20 reveal">
     <div class="relative border-l-2 border-summit-slate/15 pl-8 space-y-10">
       {events.map((event) => {
         const style = kindStyles[event.kind as keyof typeof kindStyles];

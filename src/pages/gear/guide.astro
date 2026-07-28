@@ -5,11 +5,11 @@ import { gearByElevation } from '../../data/gearByElevation';
 ---
 
 <BaseLayout title="Gear Buying Guide" description="What gear you actually need at different elevations.">
-  <Hero image="/images/placeholders/snow.svg" title="Gear by Elevation" subtitle="What you actually need, tier by tier — not everything, all at once." size="md" />
+  <Hero image="/images/climbs/orizaba.jpg" eyebrow="Pack List" title="Gear by Elevation" subtitle="What you actually need, tier by tier — not everything, all at once." size="md" />
 
-  <section class="mx-auto max-w-4xl px-4 sm:px-6 py-16 space-y-12">
+  <section class="mx-auto max-w-4xl px-4 sm:px-6 py-20 space-y-8">
     {gearByElevation.map((tier) => (
-      <div id={tier.id} class="rounded-2xl border border-summit-slate/10 bg-white shadow-md overflow-hidden">
+      <div id={tier.id} class="rounded-2xl border border-summit-slate/10 bg-white shadow-md overflow-hidden reveal">
         <div class="drift-gradient text-summit-snow px-6 py-5">
           <p class="text-sm font-semibold uppercase tracking-wide text-summit-ice">{tier.range}</p>
           <h2 class="font-display text-2xl font-bold">{tier.title}</h2>

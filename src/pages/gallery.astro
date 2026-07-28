@@ -16,15 +16,15 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
 ---
 
 <BaseLayout title="Gallery" description="Photos from every trip, in one grid.">
-  <Hero image="/images/placeholders/alpine-lake.svg" title="Gallery" subtitle="Every trip, in pictures. Click any photo to zoom in." size="md" />
+  <Hero image="/images/climbs/hood.jpg" eyebrow="Photos" title="Gallery" subtitle="Every trip, in pictures. Click any photo to zoom in." size="md" />
 
-  <section class="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 py-20 reveal">
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
       {photos.map((photo) => (
         <button
           data-lightbox={withBase(photo.src)}
           data-alt={photo.alt}
-          class="group block overflow-hidden rounded-lg h-40 sm:h-48 w-full"
+          class="group block overflow-hidden rounded-xl h-40 sm:h-48 w-full ring-1 ring-summit-slate/10"
         >
           <img
             src={withBase(photo.src)}

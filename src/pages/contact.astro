@@ -11,9 +11,9 @@ const contactEmail = 'you@example.com';
 ---
 
 <BaseLayout title="Contact" description="Get in touch.">
-  <Hero image="/images/placeholders/forest.svg" title="Get in Touch" subtitle="Questions about a route, gear, or just want to say hi?" size="md" />
+  <Hero image="/images/climbs/iztaccihuatl.jpg" eyebrow="Say Hello" title="Get in Touch" subtitle="Questions about a route, gear, or just want to say hi?" size="md" />
 
-  <section class="mx-auto max-w-2xl px-4 sm:px-6 py-16">
+  <section class="mx-auto max-w-2xl px-4 sm:px-6 py-20 reveal">
     {!isConfigured && (
       <div class="mb-8 rounded-xl border border-summit-ember/40 bg-orange-50 px-5 py-4 text-sm text-summit-navy">
         <strong>Heads up:</strong> this form isn't wired up yet. Create a free account at
@@ -24,7 +24,7 @@ const contactEmail = 'you@example.com';
       </div>
     )}
 
-    <form action={formAction} method="POST" class="space-y-5">
+    <form action={formAction} method="POST" class="space-y-5 rounded-2xl bg-white shadow-md ring-1 ring-summit-slate/5 p-6 sm:p-8">
       <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
 
       <div>
