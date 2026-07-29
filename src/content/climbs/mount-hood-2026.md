@@ -13,6 +13,7 @@ coordinates: [45.3736, -121.6960]
 heroImage: "/images/climbs/hood.jpg"
 gallery:
   - "/images/climbs/hood.jpg"
+  - "/images/climbs/hood-trillium-lake.jpg"
 profile:
   - label: "Timberline Lodge"
     elevationFt: 5960

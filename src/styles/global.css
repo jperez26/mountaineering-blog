@@ -12,6 +12,7 @@
   --color-summit-snow: #f8f6f0;
   --color-summit-ember: #c8702f;
   --color-summit-ember-dark: #97501f;
+  --color-summit-silver: #b7bcc0;
 }
 
 html {
@@ -54,13 +55,13 @@ h1, h2, h3, h4, .font-display {
   background-image:
     repeating-radial-gradient(
       circle at 80% 70%,
-      rgba(238, 242, 228, 0.07) 0px,
+      rgba(183, 188, 192, 0.14) 0px,
       transparent 1px,
       transparent 26px,
-      rgba(238, 242, 228, 0.06) 27px,
+      rgba(183, 188, 192, 0.11) 27px,
       transparent 28px,
       transparent 54px,
-      rgba(238, 242, 228, 0.05) 55px,
+      rgba(183, 188, 192, 0.09) 55px,
       transparent 56px
     ),
     linear-gradient(120deg, var(--color-summit-forest), var(--color-summit-fern), var(--color-summit-forest));
@@ -111,13 +112,13 @@ h1, h2, h3, h4, .font-display {
 .topo-bg {
   background-image: repeating-radial-gradient(
     circle at 15% 20%,
-    rgba(24, 46, 33, 0.055) 0px,
+    rgba(120, 128, 132, 0.14) 0px,
     transparent 1px,
     transparent 26px,
-    rgba(24, 46, 33, 0.05) 27px,
+    rgba(120, 128, 132, 0.12) 27px,
     transparent 28px,
     transparent 54px,
-    rgba(24, 46, 33, 0.04) 55px,
+    rgba(120, 128, 132, 0.10) 55px,
     transparent 56px
   );
   background-size: 240px 240px;
@@ -125,13 +126,13 @@ h1, h2, h3, h4, .font-display {
 .topo-bg-dark {
   background-image: repeating-radial-gradient(
     circle at 80% 70%,
-    rgba(238, 242, 228, 0.07) 0px,
+    rgba(200, 205, 208, 0.13) 0px,
     transparent 1px,
     transparent 26px,
-    rgba(238, 242, 228, 0.06) 27px,
+    rgba(200, 205, 208, 0.10) 27px,
     transparent 28px,
     transparent 54px,
-    rgba(238, 242, 228, 0.05) 55px,
+    rgba(200, 205, 208, 0.08) 55px,
     transparent 56px
   );
   background-size: 240px 240px;

@@ -5,7 +5,8 @@ Mountain photos are sourced from Wikimedia Commons under their original licenses
 | File | Subject | Photographer | License | Source |
 |---|---|---|---|---|
 | `public/images/climbs/washington.jpg` | Mount Washington, NH | Harvey Barrison | CC BY-SA 2.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:White_Mountains_12_30_09_81.jpg) |
-| `public/images/climbs/hood.jpg` | Mount Hood, OR | Kevin Crosby | CC BY-SA 2.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Oregon_Mount_Hood_from_Trillium_Lake_2024.jpg) |
+| `public/images/climbs/hood.jpg` | Mount Hood, OR (winter, Jan. 2016) | Oregon Department of Transportation | CC BY 2.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mount_Hood_January_2016.jpg) |
+| `public/images/climbs/hood-trillium-lake.jpg` | Mount Hood from Trillium Lake | Kevin Crosby | CC BY-SA 2.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Oregon_Mount_Hood_from_Trillium_Lake_2024.jpg) |
 | `public/images/climbs/baker.jpg` | Mount Baker, WA | Lhb1239 | CC BY-SA 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mount_Baker_from_Boulder_Creek.jpg) |
 | `public/images/climbs/rainier.jpg` | Mount Rainier, WA | Caleb Riston (FriendlyToaster) | CC0 (public domain) | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Rainier20200906.jpg) |
 | `public/images/climbs/orizaba.jpg` | Pico de Orizaba, Mexico | México en Fotos | CC BY-SA 2.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Pico_de_Orizaba_desde_Hidalgo,_Puebla.jpg) |
