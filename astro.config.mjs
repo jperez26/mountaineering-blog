@@ -5,8 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // Update these once you know your GitHub username / repo name (see SETUP.md).
-  site: 'https://your-username.github.io',
+  site: 'https://jperez26.github.io',
   base: '/mountaineering-blog',
   integrations: [sitemap()],
   vite: {
