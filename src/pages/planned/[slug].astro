@@ -35,9 +35,9 @@ const facts = [
   <section class="mx-auto max-w-4xl px-4 sm:px-6 py-20 reveal">
     <div class="grid gap-4 sm:grid-cols-3 mb-10">
       {facts.map((f) => (
-        <div class="rounded-xl bg-white shadow-sm ring-1 ring-summit-fern/10 px-4 py-3">
-          <p class="text-xs uppercase tracking-wide text-summit-fern/60">{f.label}</p>
-          <p class="font-semibold text-summit-forest">{f.value}</p>
+        <div class="rounded-xl bg-white dark:bg-summit-fern shadow-sm ring-1 ring-summit-fern/10 dark:ring-white/10 px-4 py-3">
+          <p class="text-xs uppercase tracking-wide text-summit-fern/60 dark:text-summit-mist/80">{f.label}</p>
+          <p class="font-semibold text-summit-forest dark:text-summit-mist">{f.value}</p>
         </div>
       ))}
     </div>
@@ -48,9 +48,9 @@ const facts = [
       </div>
     )}
 
-    <p class="text-lg text-summit-fern/90 italic border-l-4 border-summit-moss pl-4">{data.summary}</p>
+    <p class="text-lg text-summit-fern/90 dark:text-summit-mist/80 italic border-l-4 border-summit-moss pl-4">{data.summary}</p>
 
-    <div class="prose prose-slate mt-8 max-w-none prose-headings:font-display prose-a:text-summit-ember-dark">
+    <div class="prose prose-slate dark:prose-invert mt-8 max-w-none prose-headings:font-display prose-a:text-summit-ember-dark dark:text-summit-ember">
       <Content />
     </div>
 
@@ -62,7 +62,7 @@ const facts = [
 
     {data.coordinates && (
       <div class="mt-10">
-        <h2 class="font-display text-2xl font-bold text-summit-forest mb-4">Location</h2>
+        <h2 class="font-display text-2xl font-bold text-summit-forest dark:text-summit-mist mb-4">Location</h2>
         <ClimbMap
           height="320px"
           points={[{ lat: data.coordinates[0], lng: data.coordinates[1], title: data.mountain, href: `/planned/${id}`, status: data.status }]}
@@ -70,6 +70,6 @@ const facts = [
       </div>
     )}
 
-    <a href={withBase('/planned')} class="mt-10 inline-block text-sm font-semibold text-summit-ember-dark hover:underline">← Back to Planned Trips</a>
+    <a href={withBase('/planned')} class="mt-10 inline-block text-sm font-semibold text-summit-ember-dark dark:text-summit-ember hover:underline">← Back to Planned Trips</a>
   </section>
 </BaseLayout>

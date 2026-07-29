@@ -24,39 +24,39 @@ const contactEmail = 'you@example.com';
       </div>
     )}
 
-    <form action={formAction} method="POST" class="space-y-5 rounded-2xl bg-white shadow-md ring-1 ring-summit-fern/5 p-6 sm:p-8">
+    <form action={formAction} method="POST" class="space-y-5 rounded-2xl bg-white dark:bg-summit-fern shadow-md ring-1 ring-summit-fern/5 dark:ring-white/10 p-6 sm:p-8">
       <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
 
       <div>
-        <label for="name" class="block text-sm font-semibold text-summit-forest">Name</label>
+        <label for="name" class="block text-sm font-semibold text-summit-forest dark:text-summit-mist">Name</label>
         <input
           id="name"
           name="name"
           type="text"
           required
-          class="mt-1 w-full rounded-lg border border-summit-fern/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-moss"
+          class="mt-1 w-full rounded-lg border border-summit-fern/20 dark:border-white/15 bg-white dark:bg-summit-forest/40 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-moss"
         />
       </div>
 
       <div>
-        <label for="email" class="block text-sm font-semibold text-summit-forest">Email</label>
+        <label for="email" class="block text-sm font-semibold text-summit-forest dark:text-summit-mist">Email</label>
         <input
           id="email"
           name="email"
           type="email"
           required
-          class="mt-1 w-full rounded-lg border border-summit-fern/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-moss"
+          class="mt-1 w-full rounded-lg border border-summit-fern/20 dark:border-white/15 bg-white dark:bg-summit-forest/40 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-moss"
         />
       </div>
 
       <div>
-        <label for="message" class="block text-sm font-semibold text-summit-forest">Message</label>
+        <label for="message" class="block text-sm font-semibold text-summit-forest dark:text-summit-mist">Message</label>
         <textarea
           id="message"
           name="message"
           rows="5"
           required
-          class="mt-1 w-full rounded-lg border border-summit-fern/20 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-moss"
+          class="mt-1 w-full rounded-lg border border-summit-fern/20 dark:border-white/15 bg-white dark:bg-summit-forest/40 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-summit-moss"
         ></textarea>
       </div>
 

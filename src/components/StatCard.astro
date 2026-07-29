@@ -6,8 +6,8 @@ interface Props {
 const { value, label } = Astro.props;
 ---
 
-<div class="relative overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-summit-fern/5 px-6 py-6 text-center card-hover">
+<div class="relative overflow-hidden rounded-2xl bg-white dark:bg-summit-fern shadow-md ring-1 ring-summit-fern/5 dark:ring-white/10 px-6 py-6 text-center card-hover">
   <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-summit-moss via-summit-forest to-summit-ember"></div>
-  <p class="font-display text-3xl sm:text-4xl font-bold text-summit-forest">{value}</p>
-  <p class="mt-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wide text-summit-fern/60">{label}</p>
+  <p class="font-display text-3xl sm:text-4xl font-bold text-summit-forest dark:text-summit-mist">{value}</p>
+  <p class="mt-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wide text-summit-fern/60 dark:text-summit-mist/80">{label}</p>
 </div>

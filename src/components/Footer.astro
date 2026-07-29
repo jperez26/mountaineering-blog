@@ -32,10 +32,11 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
         <li><a href={withBase('/gear')} class="hover:text-summit-moss">Gear Reviews</a></li>
         <li><a href={withBase('/gear/guide')} class="hover:text-summit-moss">Buying Guide</a></li>
         <li><a href={withBase('/contact')} class="hover:text-summit-moss">Get in Touch</a></li>
+        <li><a href={withBase('/rss.xml')} class="hover:text-summit-moss">RSS Feed</a></li>
       </ul>
     </div>
   </div>
   <div class="border-t border-white/10 py-4 text-center text-xs text-summit-mist/60">
-    © {year} {siteTitle}. Built with Astro — replace this footer's placeholder text any time in <code>src/components/Footer.astro</code>.
+    © {year} {siteTitle} · <a href={withBase('/privacy')} class="hover:text-summit-moss underline">Privacy Policy</a> · Built with Astro — replace this footer's placeholder text any time in <code>src/components/Footer.astro</code>.
   </div>
 </footer>

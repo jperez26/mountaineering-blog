@@ -27,7 +27,7 @@ const totalCost = data.costBreakdown?.reduce((sum, c) => {
   <Hero image={post.data.heroImage || '/images/placeholders/snow.svg'} eyebrow="Field Notes" title={post.data.title} size="md" />
 
   <article class="mx-auto max-w-3xl px-4 sm:px-6 py-20 reveal">
-    <p class="text-sm font-semibold uppercase tracking-wide text-summit-ember-dark">
+    <p class="text-sm font-semibold uppercase tracking-wide text-summit-ember-dark dark:text-summit-ember">
       {data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
     </p>
     <div class="mt-2 flex gap-2 flex-wrap">
@@ -37,22 +37,22 @@ const totalCost = data.costBreakdown?.reduce((sum, c) => {
     </div>
 
     {hasTripInfo && (
-      <div class="mt-8 rounded-2xl bg-summit-mist/60 ring-1 ring-summit-fern/10 p-6 space-y-6">
-        <h2 class="font-display text-xl font-bold text-summit-forest">
+      <div class="mt-8 rounded-2xl bg-summit-mist/60 dark:bg-summit-forest/40 ring-1 ring-summit-fern/10 dark:ring-white/10 p-6 space-y-6">
+        <h2 class="font-display text-xl font-bold text-summit-forest dark:text-summit-mist">
           Trip Info{data.mountain ? `: ${data.mountain}` : ''}
         </h2>
 
         {data.howToGetThere && (
           <div>
-            <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark mb-1">Getting There</p>
-            <p class="text-summit-fern/90">{data.howToGetThere}</p>
+            <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark dark:text-summit-ember mb-1">Getting There</p>
+            <p class="text-summit-fern/90 dark:text-summit-mist/80">{data.howToGetThere}</p>
           </div>
         )}
 
         {data.whatToBring && data.whatToBring.length > 0 && (
           <div>
-            <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark mb-1">What to Bring</p>
-            <ul class="grid gap-1 sm:grid-cols-2 text-summit-fern/90 list-disc list-inside">
+            <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark dark:text-summit-ember mb-1">What to Bring</p>
+            <ul class="grid gap-1 sm:grid-cols-2 text-summit-fern/90 dark:text-summit-mist/80 list-disc list-inside">
               {data.whatToBring.map((item) => <li>{item}</li>)}
             </ul>
           </div>
@@ -60,17 +60,17 @@ const totalCost = data.costBreakdown?.reduce((sum, c) => {
 
         {data.costBreakdown && data.costBreakdown.length > 0 && (
           <div>
-            <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark mb-1">Cost Breakdown</p>
-            <ul class="divide-y divide-summit-fern/10">
+            <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark dark:text-summit-ember mb-1">Cost Breakdown</p>
+            <ul class="divide-y divide-summit-fern/10 dark:divide-white/15">
               {data.costBreakdown.map((c) => (
-                <li class="flex items-center justify-between py-1.5 text-summit-fern/90">
+                <li class="flex items-center justify-between py-1.5 text-summit-fern/90 dark:text-summit-mist/80">
                   <span>{c.item}</span>
-                  <span class="font-semibold text-summit-forest">{c.cost}</span>
+                  <span class="font-semibold text-summit-forest dark:text-summit-mist">{c.cost}</span>
                 </li>
               ))}
             </ul>
             {totalCost ? (
-              <p class="mt-2 flex items-center justify-between font-semibold text-summit-forest border-t border-summit-fern/20 pt-2">
+              <p class="mt-2 flex items-center justify-between font-semibold text-summit-forest dark:text-summit-mist border-t border-summit-fern/20 dark:border-white/15 pt-2">
                 <span>Estimated Total</span>
                 <span>${totalCost.toLocaleString()}</span>
               </p>
@@ -80,9 +80,9 @@ const totalCost = data.costBreakdown?.reduce((sum, c) => {
       </div>
     )}
 
-    <div class="prose prose-slate mt-8 max-w-none prose-headings:font-display prose-a:text-summit-ember-dark">
+    <div class="prose prose-slate dark:prose-invert mt-8 max-w-none prose-headings:font-display prose-a:text-summit-ember-dark dark:text-summit-ember">
       <Content />
     </div>
-    <a href={withBase('/blog')} class="mt-10 inline-block text-sm font-semibold text-summit-ember-dark hover:underline">← Back to Blog</a>
+    <a href={withBase('/blog')} class="mt-10 inline-block text-sm font-semibold text-summit-ember-dark dark:text-summit-ember hover:underline">← Back to Blog</a>
   </article>
 </BaseLayout>

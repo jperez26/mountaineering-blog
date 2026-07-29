@@ -24,7 +24,7 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
         <button
           data-lightbox={withBase(photo.src)}
           data-alt={photo.alt}
-          class="group block overflow-hidden rounded-xl h-40 sm:h-48 w-full ring-1 ring-summit-fern/10"
+          class="group block overflow-hidden rounded-xl h-40 sm:h-48 w-full ring-1 ring-summit-fern/10 dark:ring-white/10"
         >
           <img
             src={withBase(photo.src)}
@@ -35,6 +35,6 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
         </button>
       ))}
     </div>
-    {photos.length === 0 && <p class="text-summit-fern/70">No photos yet — add a <code>heroImage</code> or <code>gallery</code> field to a climb.</p>}
+    {photos.length === 0 && <p class="text-summit-fern/70 dark:text-summit-mist/80">No photos yet — add a <code>heroImage</code> or <code>gallery</code> field to a climb.</p>}
   </section>
 </BaseLayout>

@@ -10,14 +10,14 @@ const widgetId = `weather-${Math.random().toString(36).slice(2, 9)}`;
 
 <div
   id={widgetId}
-  class="weather-widget rounded-2xl bg-white shadow-md ring-1 ring-summit-fern/10 p-5 flex items-center gap-4"
+  class="weather-widget rounded-2xl bg-white dark:bg-summit-fern shadow-md ring-1 ring-summit-fern/10 dark:ring-white/10 p-5 flex items-center gap-4"
   data-lat={lat}
   data-lng={lng}
 >
   <div class="weather-icon text-3xl leading-none" aria-hidden="true">⛰️</div>
   <div class="flex-1">
-    <p class="text-xs uppercase tracking-wide text-summit-fern/60">Current Conditions on {mountain}</p>
-    <p class="weather-status mt-1 text-summit-forest font-semibold">Loading live weather…</p>
+    <p class="text-xs uppercase tracking-wide text-summit-fern/60 dark:text-summit-mist/80">Current Conditions on {mountain}</p>
+    <p class="weather-status mt-1 text-summit-forest dark:text-summit-mist font-semibold">Loading live weather…</p>
   </div>
 </div>
 

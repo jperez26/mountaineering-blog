@@ -11,7 +11,7 @@ const basePath = data.status === 'completed' ? '/summits' : '/planned';
 const image = data.heroImage || '/images/placeholders/sunrise.svg';
 ---
 
-<a href={withBase(`${basePath}/${id}`)} class="group block overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-summit-fern/5 card-hover">
+<a href={withBase(`${basePath}/${id}`)} class="group block overflow-hidden rounded-2xl bg-white dark:bg-summit-fern shadow-md ring-1 ring-summit-fern/5 dark:ring-white/10 card-hover">
   <div class="relative h-52 overflow-hidden">
     <img src={withBase(image)} alt={data.title} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/25"></div>
@@ -26,9 +26,9 @@ const image = data.heroImage || '/images/placeholders/sunrise.svg';
     <p class="absolute bottom-3 left-4 right-4 font-display text-xl font-bold text-white drop-shadow-md">{data.mountain}</p>
   </div>
   <div class="p-5">
-    <p class="text-sm text-summit-fern/70">{data.region} · {data.elevationFt.toLocaleString()} ft</p>
-    <p class="mt-3 text-sm text-summit-fern/90 line-clamp-2">{data.summary}</p>
-    <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-summit-ember-dark">
+    <p class="text-sm text-summit-fern/70 dark:text-summit-mist/80">{data.region} · {data.elevationFt.toLocaleString()} ft</p>
+    <p class="mt-3 text-sm text-summit-fern/90 dark:text-summit-mist/80 line-clamp-2">{data.summary}</p>
+    <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-summit-ember-dark dark:text-summit-ember">
       {data.date ? data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'Long-Term Goal'}
     </p>
   </div>

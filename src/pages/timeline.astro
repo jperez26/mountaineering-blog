@@ -46,35 +46,35 @@ const kindStyles = {
   <Hero image="/images/climbs/iztaccihuatl.jpg" eyebrow="The Journey" title="Timeline" subtitle="Every summit, plan, and journal entry, laid out in order." size="md" />
 
   <section class="mx-auto max-w-3xl px-4 sm:px-6 py-20 reveal">
-    <div class="relative border-l-2 border-summit-fern/15 pl-8 space-y-10">
+    <div class="relative border-l-2 border-summit-fern/15 dark:border-white/15 pl-8 space-y-10">
       {events.map((event) => {
         const style = kindStyles[event.kind as keyof typeof kindStyles];
         return (
           <div class="relative">
             <span class={`absolute -left-[2.55rem] top-1 h-4 w-4 rounded-full border-2 border-summit-snow ${style.dot}`}></span>
-            <p class="text-xs font-semibold uppercase tracking-wide text-summit-fern/60">
+            <p class="text-xs font-semibold uppercase tracking-wide text-summit-fern/60 dark:text-summit-mist/80">
               {event.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
             </p>
             <a href={withBase(event.href)} class="group block mt-1">
               <span class={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold mb-1 ${style.badge}`}>{style.label}</span>
-              <h3 class="font-display text-xl font-bold text-summit-forest group-hover:text-summit-ember-dark transition-colors">{event.title}</h3>
-              <p class="text-summit-fern/80 mt-1 line-clamp-2">{event.detail}</p>
+              <h3 class="font-display text-xl font-bold text-summit-forest dark:text-summit-mist group-hover:text-summit-ember-dark dark:group-hover:text-summit-ember transition-colors">{event.title}</h3>
+              <p class="text-summit-fern/80 dark:text-summit-mist/80 mt-1 line-clamp-2">{event.detail}</p>
             </a>
           </div>
         );
       })}
-      {events.length === 0 && <p class="text-summit-fern/70">Nothing to show yet — add climbs or blog posts to see them here.</p>}
+      {events.length === 0 && <p class="text-summit-fern/70 dark:text-summit-mist/80">Nothing to show yet — add climbs or blog posts to see them here.</p>}
     </div>
 
     {someday.length > 0 && (
       <div class="mt-16">
-        <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark">Someday</p>
-        <h2 class="font-display text-2xl font-bold text-summit-forest mt-1">Long-Term Goals</h2>
+        <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark dark:text-summit-ember">Someday</p>
+        <h2 class="font-display text-2xl font-bold text-summit-forest dark:text-summit-mist mt-1">Long-Term Goals</h2>
         <div class="mt-4 space-y-4">
           {someday.map((goal) => (
-            <a href={withBase(goal.href)} class="group block rounded-xl bg-white shadow-sm ring-1 ring-summit-fern/10 p-5 card-hover">
-              <h3 class="font-display text-lg font-bold text-summit-forest group-hover:text-summit-ember-dark transition-colors">{goal.title}</h3>
-              <p class="text-summit-fern/80 mt-1">{goal.detail}</p>
+            <a href={withBase(goal.href)} class="group block rounded-xl bg-white dark:bg-summit-fern shadow-sm ring-1 ring-summit-fern/10 dark:ring-white/10 p-5 card-hover">
+              <h3 class="font-display text-lg font-bold text-summit-forest dark:text-summit-mist group-hover:text-summit-ember-dark dark:group-hover:text-summit-ember transition-colors">{goal.title}</h3>
+              <p class="text-summit-fern/80 dark:text-summit-mist/80 mt-1">{goal.detail}</p>
             </a>
           ))}
         </div>

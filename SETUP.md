@@ -34,6 +34,10 @@ to match your actual GitHub username and repo name. Commit and push that change 
 
 > If you ever rename the repo to exactly `YOUR_USERNAME.github.io`, you can delete the `base` line entirely and your site will live at the bare `https://YOUR_USERNAME.github.io` with no `/mountaineering-blog` in the URL.
 
+Two other files hardcode the same placeholder domain and need the same find-and-replace:
+- `public/robots.txt` (the `Sitemap:` line)
+- Nothing else — the RSS feed, sitemap, and Open Graph tags all derive their URLs from `astro.config.mjs` automatically.
+
 ## 4. Turn on GitHub Pages
 
 1. On your repo's GitHub page, go to **Settings → Pages**.

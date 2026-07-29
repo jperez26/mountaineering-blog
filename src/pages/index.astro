@@ -52,8 +52,8 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
 
   <section class="mx-auto max-w-6xl px-4 sm:px-6 mt-20 reveal">
     <div class="flex items-baseline justify-between">
-      <h2 class="text-2xl sm:text-3xl font-bold text-summit-forest">Recent Summits</h2>
-      <a href={withBase('/summits')} class="text-sm font-semibold text-summit-ember-dark hover:underline">View all →</a>
+      <h2 class="text-2xl sm:text-3xl font-bold text-summit-forest dark:text-summit-mist">Recent Summits</h2>
+      <a href={withBase('/summits')} class="text-sm font-semibold text-summit-ember-dark dark:text-summit-ember hover:underline">View all →</a>
     </div>
     <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {completed.slice(0, 3).map((climb) => <ClimbCard climb={climb} />)}
@@ -76,12 +76,12 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
 
   <section class="mx-auto max-w-6xl px-4 sm:px-6 py-20 reveal">
     <div class="flex items-baseline justify-between">
-      <h2 class="text-2xl sm:text-3xl font-bold text-summit-forest">Latest From the Blog</h2>
-      <a href={withBase('/blog')} class="text-sm font-semibold text-summit-ember-dark hover:underline">View all →</a>
+      <h2 class="text-2xl sm:text-3xl font-bold text-summit-forest dark:text-summit-mist">Latest From the Blog</h2>
+      <a href={withBase('/blog')} class="text-sm font-semibold text-summit-ember-dark dark:text-summit-ember hover:underline">View all →</a>
     </div>
     <div class="mt-6 grid gap-6 sm:grid-cols-3">
       {posts.map((post) => (
-        <a href={withBase(`/blog/${post.id}`)} class="group block overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-summit-fern/5 card-hover">
+        <a href={withBase(`/blog/${post.id}`)} class="group block overflow-hidden rounded-2xl bg-white dark:bg-summit-fern shadow-md ring-1 ring-summit-fern/5 dark:ring-white/10 card-hover">
           <div class="h-40 overflow-hidden">
             <img
               src={withBase(post.data.heroImage || '/images/placeholders/snow.svg')}
@@ -91,11 +91,11 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
             />
           </div>
           <div class="p-5">
-            <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark">
+            <p class="text-xs font-semibold uppercase tracking-wide text-summit-ember-dark dark:text-summit-ember">
               {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
             </p>
-            <h3 class="mt-1 font-display text-lg font-bold text-summit-forest">{post.data.title}</h3>
-            <p class="mt-2 text-sm text-summit-fern/80 line-clamp-2">{post.data.excerpt}</p>
+            <h3 class="mt-1 font-display text-lg font-bold text-summit-forest dark:text-summit-mist">{post.data.title}</h3>
+            <p class="mt-2 text-sm text-summit-fern/80 dark:text-summit-mist/80 line-clamp-2">{post.data.excerpt}</p>
           </div>
         </a>
       ))}

@@ -39,10 +39,10 @@ const tickCount = 4;
 const ticks = Array.from({ length: tickCount + 1 }, (_, i) => domainMin + (i * (domainMax - domainMin)) / tickCount);
 ---
 
-<div class="rounded-2xl bg-white shadow-md ring-1 ring-summit-fern/10 p-4 sm:p-6">
+<div class="elevation-chart rounded-2xl bg-white dark:bg-summit-fern shadow-md ring-1 ring-summit-fern/10 dark:ring-white/10 p-4 sm:p-6">
   <div class="flex items-baseline justify-between gap-4 mb-2">
-    <h3 class="font-display text-lg font-bold text-summit-forest">Route Profile</h3>
-    {gainFt && <p class="text-sm font-semibold text-summit-ember-dark">{gainFt.toLocaleString()} ft gain</p>}
+    <h3 class="font-display text-lg font-bold text-summit-forest dark:text-summit-mist">Route Profile</h3>
+    {gainFt && <p class="text-sm font-semibold text-summit-ember-dark dark:text-summit-ember">{gainFt.toLocaleString()} ft gain</p>}
   </div>
   <svg viewBox={`0 0 ${width} ${height}`} class="w-full h-auto" role="img" aria-label="Elevation profile of the route from start to summit">
     <!-- gridlines -->
@@ -50,8 +50,8 @@ const ticks = Array.from({ length: tickCount + 1 }, (_, i) => domainMin + (i * (
       const y = yFor(t);
       return (
         <g>
-          <line x1={padding.left} y1={y} x2={width - padding.right} y2={y} stroke="#33513c" stroke-opacity="0.12" stroke-width="1" />
-          <text x={padding.left - 10} y={y} text-anchor="end" dominant-baseline="middle" font-size="12" fill="#33513c" opacity="0.55">
+          <line class="chart-grid-line" x1={padding.left} y1={y} x2={width - padding.right} y2={y} stroke="#33513c" stroke-opacity="0.12" stroke-width="1" />
+          <text class="chart-grid-label" x={padding.left - 10} y={y} text-anchor="end" dominant-baseline="middle" font-size="12" fill="#33513c" opacity="0.55">
             {Math.round(t).toLocaleString()}'
           </text>
         </g>
@@ -65,8 +65,8 @@ const ticks = Array.from({ length: tickCount + 1 }, (_, i) => domainMin + (i * (
         <stop offset="100%" stop-color="#4d8f5e" stop-opacity="0.03" />
       </linearGradient>
     </defs>
-    <path d={areaPath} fill="url(#profile-fill)" />
-    <path d={linePath} fill="none" stroke="#3f7d4f" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
+    <path class="chart-area" d={areaPath} fill="url(#profile-fill)" />
+    <path class="chart-line" d={linePath} fill="none" stroke="#3f7d4f" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
 
     <!-- waypoints -->
     {points.map((p, i) => {
@@ -78,6 +78,7 @@ const ticks = Array.from({ length: tickCount + 1 }, (_, i) => domainMin + (i * (
             <title>{`${p.label}: ${p.elevationFt.toLocaleString()} ft`}</title>
           </circle>
           <text
+            class="chart-waypoint-label"
             x={p.x}
             y={labelUp ? p.y - 16 : p.y + 24}
             text-anchor="middle"
@@ -88,6 +89,7 @@ const ticks = Array.from({ length: tickCount + 1 }, (_, i) => domainMin + (i * (
             {p.label}
           </text>
           <text
+            class="chart-waypoint-sublabel"
             x={p.x}
             y={labelUp ? p.y - 3 : p.y + 37}
             text-anchor="middle"
@@ -101,5 +103,5 @@ const ticks = Array.from({ length: tickCount + 1 }, (_, i) => domainMin + (i * (
       );
     })}
   </svg>
-  <p class="mt-2 text-xs text-summit-fern/50">Schematic route profile — waypoints are illustrative, not a surveyed GPS track.</p>
+  <p class="mt-2 text-xs text-summit-fern/50 dark:text-summit-mist/80">Schematic route profile — waypoints are illustrative, not a surveyed GPS track.</p>
 </div>

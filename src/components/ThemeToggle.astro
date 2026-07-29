@@ -1,0 +1,48 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<button
+  type="button"
+  aria-label="Toggle light/dark theme"
+  class:list={['theme-toggle inline-flex items-center justify-center rounded-full p-2 transition-colors hover:text-summit-moss', className]}
+>
+  <svg class="icon-sun h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+    <circle cx="12" cy="12" r="4.2" />
+    <path d="M12 2.5v2.4M12 19.1v2.4M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7" />
+  </svg>
+  <svg class="icon-moon h-[18px] w-[18px]" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2Z" />
+  </svg>
+</button>
+
+<script>
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem('theme', next);
+    } catch {}
+  }
+  document.querySelectorAll('.theme-toggle').forEach((btn) => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = 'true';
+    btn.addEventListener('click', toggleTheme);
+  });
+</script>
+
+<style>
+  .theme-toggle .icon-moon {
+    display: none;
+  }
+  [data-theme='dark'] .theme-toggle .icon-moon {
+    display: block;
+  }
+  [data-theme='dark'] .theme-toggle .icon-sun {
+    display: none;
+  }
+</style>

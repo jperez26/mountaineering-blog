@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Class/attribute-based dark mode instead of the OS-preference media query,
+   so the toggle in the nav can override the system setting. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme {
   --font-display: "Playfair Display", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
@@ -13,6 +17,7 @@
   --color-summit-ember: #c8702f;
   --color-summit-ember-dark: #97501f;
   --color-summit-silver: #b7bcc0;
+  --color-summit-charcoal: #0f1c15;
 }
 
 html {
@@ -21,8 +26,6 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-summit-snow);
-  color: var(--color-summit-forest);
 }
 
 h1, h2, h3, h4, .font-display {
@@ -55,13 +58,13 @@ h1, h2, h3, h4, .font-display {
   background-image:
     repeating-radial-gradient(
       circle at 80% 70%,
-      rgba(183, 188, 192, 0.14) 0px,
-      transparent 1px,
-      transparent 26px,
-      rgba(183, 188, 192, 0.11) 27px,
+      rgba(226, 229, 230, 0.22) 0px,
+      transparent 1.5px,
+      transparent 25px,
+      rgba(150, 156, 159, 0.14) 26.5px,
       transparent 28px,
-      transparent 54px,
-      rgba(183, 188, 192, 0.09) 55px,
+      transparent 53px,
+      rgba(226, 229, 230, 0.16) 54.5px,
       transparent 56px
     ),
     linear-gradient(120deg, var(--color-summit-forest), var(--color-summit-fern), var(--color-summit-forest));
@@ -112,27 +115,40 @@ h1, h2, h3, h4, .font-display {
 .topo-bg {
   background-image: repeating-radial-gradient(
     circle at 15% 20%,
-    rgba(120, 128, 132, 0.14) 0px,
-    transparent 1px,
-    transparent 26px,
-    rgba(120, 128, 132, 0.12) 27px,
+    rgba(235, 237, 238, 0.55) 0px,
+    transparent 1.5px,
+    transparent 25px,
+    rgba(120, 126, 130, 0.20) 26.5px,
     transparent 28px,
-    transparent 54px,
-    rgba(120, 128, 132, 0.10) 55px,
+    transparent 53px,
+    rgba(235, 237, 238, 0.45) 54.5px,
     transparent 56px
   );
   background-size: 240px 240px;
 }
+[data-theme="dark"] .topo-bg {
+  background-image: repeating-radial-gradient(
+    circle at 15% 20%,
+    rgba(226, 229, 230, 0.20) 0px,
+    transparent 1.5px,
+    transparent 25px,
+    rgba(150, 156, 159, 0.13) 26.5px,
+    transparent 28px,
+    transparent 53px,
+    rgba(226, 229, 230, 0.14) 54.5px,
+    transparent 56px
+  );
+}
 .topo-bg-dark {
   background-image: repeating-radial-gradient(
     circle at 80% 70%,
-    rgba(200, 205, 208, 0.13) 0px,
-    transparent 1px,
-    transparent 26px,
-    rgba(200, 205, 208, 0.10) 27px,
+    rgba(226, 229, 230, 0.20) 0px,
+    transparent 1.5px,
+    transparent 25px,
+    rgba(150, 156, 159, 0.13) 26.5px,
     transparent 28px,
-    transparent 54px,
-    rgba(200, 205, 208, 0.08) 55px,
+    transparent 53px,
+    rgba(226, 229, 230, 0.14) 54.5px,
     transparent 56px
   );
   background-size: 240px 240px;
@@ -156,6 +172,24 @@ h1, h2, h3, h4, .font-display {
     transform: none;
     transition: none;
   }
+}
+
+/* Elevation profile chart: raw SVG presentation attributes need explicit
+   dark-mode overrides since they can't take Tailwind's dark: variant. */
+[data-theme="dark"] .elevation-chart .chart-grid-line {
+  stroke: #eef2e4;
+}
+[data-theme="dark"] .elevation-chart .chart-grid-label {
+  fill: #eef2e4;
+}
+[data-theme="dark"] .elevation-chart .chart-waypoint-label {
+  fill: #eef2e4;
+}
+[data-theme="dark"] .elevation-chart .chart-waypoint-sublabel {
+  fill: #c3cec3;
+}
+[data-theme="dark"] .elevation-chart .chart-line {
+  stroke: #8ecb9c;
 }
 
 /* Lightbox (used on the Gallery page) */

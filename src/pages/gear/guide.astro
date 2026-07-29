@@ -9,7 +9,7 @@ import { gearByElevation } from '../../data/gearByElevation';
 
   <section class="mx-auto max-w-4xl px-4 sm:px-6 py-20 space-y-8">
     {gearByElevation.map((tier) => (
-      <div id={tier.id} class="rounded-2xl border border-summit-fern/10 bg-white shadow-md overflow-hidden reveal">
+      <div id={tier.id} class="rounded-2xl border border-summit-fern/10 dark:border-white/15 bg-white dark:bg-summit-fern shadow-md overflow-hidden reveal">
         <div class="drift-gradient text-summit-snow px-6 py-5">
           <p class="text-sm font-semibold uppercase tracking-wide text-summit-moss">{tier.range}</p>
           <h2 class="font-display text-2xl font-bold">{tier.title}</h2>
@@ -18,8 +18,8 @@ import { gearByElevation } from '../../data/gearByElevation';
         <div class="p-6 grid gap-6 sm:grid-cols-2">
           {tier.categories.map((cat) => (
             <div>
-              <p class="font-semibold text-summit-forest">{cat.category}</p>
-              <ul class="mt-2 space-y-1 text-sm text-summit-fern/90 list-disc list-inside">
+              <p class="font-semibold text-summit-forest dark:text-summit-mist">{cat.category}</p>
+              <ul class="mt-2 space-y-1 text-sm text-summit-fern/90 dark:text-summit-mist/80 list-disc list-inside">
                 {cat.items.map((item) => <li>{item}</li>)}
               </ul>
             </div>

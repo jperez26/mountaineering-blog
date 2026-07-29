@@ -19,13 +19,13 @@ const points = climbs.map((c) => ({
   <Hero image="/images/climbs/baker.jpg" eyebrow="Where To Next" title="The Map" subtitle="Green pins are summited. Terracotta pins are next up." size="md" />
 
   <section class="mx-auto max-w-6xl px-4 sm:px-6 py-20 reveal">
-    <div class="mb-4 flex gap-6 text-sm font-semibold text-summit-fern/80">
+    <div class="mb-4 flex gap-6 text-sm font-semibold text-summit-fern/80 dark:text-summit-mist/80">
       <span class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-[#4d8f5e] border border-white shadow"></span> Summited</span>
       <span class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-summit-ember border border-white shadow"></span> Planned</span>
     </div>
-    <div class="rounded-2xl overflow-hidden shadow-lg ring-1 ring-summit-fern/10">
+    <div class="rounded-2xl overflow-hidden shadow-lg ring-1 ring-summit-fern/10 dark:ring-white/10">
       <ClimbMap points={points} height="60vh" />
     </div>
-    {points.length === 0 && <p class="mt-4 text-summit-fern/70">No coordinates yet — add a <code>coordinates: [lat, lng]</code> field to a climb.</p>}
+    {points.length === 0 && <p class="mt-4 text-summit-fern/70 dark:text-summit-mist/80">No coordinates yet — add a <code>coordinates: [lat, lng]</code> field to a climb.</p>}
   </section>
 </BaseLayout>

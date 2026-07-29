@@ -16,6 +16,6 @@ const climbs = (await getCollection('climbs', ({ data }) => !data.draft && data.
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {climbs.map((climb) => <ClimbCard climb={climb} />)}
     </div>
-    {climbs.length === 0 && <p class="text-summit-fern/70">Nothing planned yet — add one in <code>src/content/climbs/</code> with <code>status: planned</code>.</p>}
+    {climbs.length === 0 && <p class="text-summit-fern/70 dark:text-summit-mist/80">Nothing planned yet — add one in <code>src/content/climbs/</code> with <code>status: planned</code>.</p>}
   </section>
 </BaseLayout>
