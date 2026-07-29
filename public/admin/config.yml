@@ -1,8 +1,8 @@
 backend:
   name: github
-  repo: jperez26/mountaineering-blog # TODO: update if your GitHub username or repo name differs
+  repo: jperez26/mountaineering-blog
   branch: main
-  base_url: https://YOUR-WORKER-SUBDOMAIN.workers.dev # TODO: set after deploying cms-oauth-worker (see ADMIN_SETUP.md)
+  base_url: https://avg-joe-cms-oauth.avgjoe-mountaineering.workers.dev
   auth_endpoint: auth
 
 publish_mode: simple
