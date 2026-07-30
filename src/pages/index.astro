@@ -23,11 +23,29 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .slice(0, 3);
 
 const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
+
+// A rotating showcase of all 14 eight-thousanders on the homepage hero.
+const eightThousanderPhotos = [
+  '/images/eight-thousanders/everest.jpg',
+  '/images/eight-thousanders/k2.jpg',
+  '/images/climbs/kangchenjunga.jpg',
+  '/images/eight-thousanders/lhotse.jpg',
+  '/images/eight-thousanders/makalu.jpg',
+  '/images/eight-thousanders/cho-oyu.jpg',
+  '/images/eight-thousanders/dhaulagiri.jpg',
+  '/images/eight-thousanders/manaslu.jpg',
+  '/images/eight-thousanders/nanga-parbat.jpg',
+  '/images/eight-thousanders/annapurna.jpg',
+  '/images/eight-thousanders/gasherbrum-1.jpg',
+  '/images/eight-thousanders/broad-peak.jpg',
+  '/images/eight-thousanders/gasherbrum-2.jpg',
+  '/images/eight-thousanders/shishapangma.jpg',
+];
 ---
 
 <BaseLayout title="Home">
   <Hero
-    image="/images/climbs/kangchenjunga.jpg"
+    images={eightThousanderPhotos}
     eyebrow="Avg Joe Mountaineering"
     title="Every Summit Builds Toward Kangchenjunga"
     subtitle="A running log of the peaks I've climbed, the ones I'm planning, and the long road toward the big one."
