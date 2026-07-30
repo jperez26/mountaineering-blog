@@ -27,7 +27,7 @@ Mountain photos are sourced from Wikimedia Commons under their original licenses
 | `public/images/eight-thousanders/manaslu.jpg` | Manaslu | Ben Tubby | CC BY 2.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sunrise,_Manaslu.jpg) |
 | `public/images/eight-thousanders/nanga-parbat.jpg` | Nanga Parbat | Imrankhakwani | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Fairy_Meadows_and_the_view_of_Nanga_Parbat.jpg) |
 | `public/images/eight-thousanders/annapurna.jpg` | Annapurna I | PrajwalMohan | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:South_Face_of_Annapurna_I_(Main).jpg) |
-| `public/images/eight-thousanders/gasherbrum-1.jpg` | Gasherbrum I (Hidden Peak) | Dr. Olaf Rieck | CC BY-SA 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:HiddenPeak.jpg) |
+| `public/images/eight-thousanders/gasherbrum-1.jpg` | Gasherbrum I (Hidden Peak) | OLderman | CC BY-SA 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Gasherbrum_I.jpg) |
 | `public/images/eight-thousanders/broad-peak.jpg` | Broad Peak | Kogo | CC BY-SA 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:7_15_BroadPeak.jpg) |
 | `public/images/eight-thousanders/gasherbrum-2.jpg` | Gasherbrum II (with Broad Peak) | original: Adha65; derivative: Rupert Pupkin | CC BY-SA 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Broad_Peak_and_Gasherbrums_from_K2.jpg) |
 | `public/images/eight-thousanders/shishapangma.jpg` | Shishapangma | Hiroki Ogawa | CC BY 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:8,013m_Shishapangma_Tibet_China_西藏_希夏邦马峰_-_panoramio.jpg) |

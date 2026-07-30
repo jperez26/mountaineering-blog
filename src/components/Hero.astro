@@ -21,14 +21,14 @@ const gallery = images && images.length > 0 ? images : image ? [image] : [];
         <img
           src={withBase(src)}
           alt=""
-          class="hero-bg absolute inset-0 h-full w-full object-cover opacity-100 transition-opacity duration-[1500ms]"
+          class="hero-bg absolute inset-0 h-full w-full object-cover object-[50%_32%] opacity-100 transition-opacity duration-[1500ms]"
           loading="eager"
         />
       ) : (
         <img
           data-src={withBase(src)}
           alt=""
-          class="hero-bg absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-[1500ms]"
+          class="hero-bg absolute inset-0 h-full w-full object-cover object-[50%_32%] opacity-0 transition-opacity duration-[1500ms]"
         />
       )
     ))}
