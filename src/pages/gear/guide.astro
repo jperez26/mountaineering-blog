@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
+import SkylineDivider from '../../components/SkylineDivider.astro';
 import { gearByElevation } from '../../data/gearByElevation';
 ---
 
 <BaseLayout title="Gear Buying Guide" description="What gear you actually need at different elevations.">
   <Hero image="/images/climbs/orizaba.jpg" eyebrow="Pack List" title="Gear by Elevation" subtitle="What you actually need, tier by tier — not everything, all at once." size="md" />
+  <SkylineDivider />
 
   <section class="mx-auto max-w-4xl px-4 sm:px-6 py-20 space-y-8">
     {gearByElevation.map((tier) => (

@@ -192,6 +192,27 @@ h1, h2, h3, h4, .font-display {
   stroke: #8ecb9c;
 }
 
+/* Skyline divider (the 8,000m-peak seam between Hero photos and the page
+   content below). Light-mode colors are inline defaults on the SVG; these
+   are the dark-mode overrides for the same raw SVG presentation attributes. */
+.skyline-divider .skyline-silhouette {
+  fill: #33513c;
+}
+.skyline-divider .skyline-label {
+  fill: #182e21;
+  opacity: 0.85;
+}
+[data-theme="dark"] .skyline-divider .skyline-fade-bottom {
+  stop-color: #0f1c15;
+}
+[data-theme="dark"] .skyline-divider .skyline-silhouette {
+  fill: #4d8f5e;
+}
+[data-theme="dark"] .skyline-divider .skyline-label {
+  fill: #eef2e4;
+  opacity: 0.7;
+}
+
 /* Lightbox (used on the Gallery page) */
 #lightbox {
   position: fixed;

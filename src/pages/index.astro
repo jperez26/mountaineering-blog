@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import SkylineDivider from '../components/SkylineDivider.astro';
 import StatCard from '../components/StatCard.astro';
 import ClimbCard from '../components/ClimbCard.astro';
 import MountainDivider from '../components/MountainDivider.astro';
@@ -40,8 +41,9 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
       </a>
     </div>
   </Hero>
+  <SkylineDivider />
 
-  <section class="mx-auto max-w-6xl px-4 sm:px-6 -mt-10 relative z-10">
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 mt-10 relative z-10">
     <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
       <StatCard value={String(completed.length)} label="Peaks Summited" />
       <StatCard value={highestFt ? `${highestFt.toLocaleString()} ft` : '—'} label="Highest Summit" />

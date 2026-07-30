@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import SkylineDivider from '../components/SkylineDivider.astro';
 import { getCollection } from 'astro:content';
 
 const climbs = await getCollection('climbs', ({ data }) => !data.draft);
@@ -17,6 +18,7 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
 
 <BaseLayout title="Gallery" description="Photos from every trip, in one grid.">
   <Hero image="/images/climbs/hood.jpg" eyebrow="Photos" title="Gallery" subtitle="Every trip, in pictures. Click any photo to zoom in." size="md" />
+  <SkylineDivider />
 
   <section class="mx-auto max-w-6xl px-4 sm:px-6 py-20 reveal">
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">

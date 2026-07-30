@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
+import SkylineDivider from '../../components/SkylineDivider.astro';
 import ClimbMap from '../../components/ClimbMap.astro';
 import ElevationProfile from '../../components/ElevationProfile.astro';
 import WeatherWidget from '../../components/WeatherWidget.astro';
@@ -31,6 +32,7 @@ const facts = [
 
 <BaseLayout title={data.title} description={data.summary}>
   <Hero image={data.heroImage || '/images/placeholders/forest.svg'} eyebrow="Planned" title={data.mountain} subtitle={data.title} />
+  <SkylineDivider />
 
   <section class="mx-auto max-w-4xl px-4 sm:px-6 py-20 reveal">
     <div class="grid gap-4 sm:grid-cols-3 mb-10">

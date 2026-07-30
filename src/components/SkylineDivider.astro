@@ -1,0 +1,73 @@
+---
+// A thin skyline of all 14 eight-thousanders, sitting right at the seam
+// between a Hero photo and the page content below — meant to soften the
+// hard cut from photo into the topo-textured background, like a horizon
+// line easing you from "the mountain" into "the map of the mountain."
+const PEAKS = [
+  { name: 'Everest', m: 8849 },
+  { name: 'K2', m: 8611 },
+  { name: 'Kangchenjunga', m: 8586 },
+  { name: 'Lhotse', m: 8516 },
+  { name: 'Makalu', m: 8485 },
+  { name: 'Cho Oyu', m: 8188 },
+  { name: 'Dhaulagiri', m: 8167 },
+  { name: 'Manaslu', m: 8163 },
+  { name: 'Nanga Parbat', m: 8126 },
+  { name: 'Annapurna', m: 8091 },
+  { name: 'Gasherbrum I', m: 8080 },
+  { name: 'Broad Peak', m: 8051 },
+  { name: 'Gasherbrum II', m: 8035 },
+  { name: 'Shishapangma', m: 8027 },
+];
+
+const width = 1600;
+const height = 120;
+const groundY = 88; // valley/baseline the peaks sit on
+const labelY = groundY + 15;
+const peakTopY = 16; // apex y for the tallest peak (Everest)
+
+const minM = Math.min(...PEAKS.map((p) => p.m));
+const maxM = Math.max(...PEAKS.map((p) => p.m));
+const apexYFor = (m) => {
+  const t = (m - minM) / (maxM - minM || 1); // 0..1, 1 = tallest
+  return groundY - t * (groundY - peakTopY);
+};
+
+const slot = width / PEAKS.length;
+const peaks = PEAKS.map((p, i) => {
+  const apexX = (i + 0.5) * slot;
+  // small deterministic jitter so saddles between peaks aren't perfectly uniform
+  const jitter = Math.sin(i * 2.4) * 5;
+  const saddleY = groundY - Math.max(0, 4 + jitter);
+  return { ...p, apexX, apexY: apexYFor(p.m), saddleY };
+});
+
+// Build one continuous filled silhouette across all 14 peaks.
+let d = `M0,${height} L0,${groundY}`;
+peaks.forEach((p, i) => {
+  d += ` L${p.apexX},${p.apexY}`;
+  const isLast = i === peaks.length - 1;
+  const nextSaddleX = isLast ? width : (i + 1) * slot;
+  const saddleY = isLast ? groundY : p.saddleY;
+  d += ` L${nextSaddleX},${saddleY}`;
+});
+d += ` L${width},${height} Z`;
+---
+
+<div class="skyline-divider relative w-full overflow-hidden leading-none" aria-hidden="true">
+  <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" class="block w-full h-16 sm:h-24">
+    <defs>
+      <linearGradient id="skyline-fade" x1="0" y1="0" x2="0" y2="1">
+        <stop class="skyline-fade-top" offset="0%" stop-color="#182e21" />
+        <stop class="skyline-fade-bottom" offset="100%" stop-color="#f8f6f0" />
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width={width} height={height} fill="url(#skyline-fade)" />
+    <path class="skyline-silhouette" d={d} />
+    {peaks.map((p) => (
+      <text class="skyline-label" x={p.apexX} y={labelY} text-anchor="middle" font-size="7.5" font-weight="600" letter-spacing="0.02em">
+        {p.name}
+      </text>
+    ))}
+  </svg>
+</div>

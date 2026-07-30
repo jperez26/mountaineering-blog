@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import SkylineDivider from '../components/SkylineDivider.astro';
 import ClimbMap from '../components/ClimbMap.astro';
 import { getCollection } from 'astro:content';
 
@@ -17,6 +18,7 @@ const points = climbs.map((c) => ({
 
 <BaseLayout title="Map" description="Every summit and planned trip, plotted on one map.">
   <Hero image="/images/climbs/baker.jpg" eyebrow="Where To Next" title="The Map" subtitle="Green pins are summited. Terracotta pins are next up." size="md" />
+  <SkylineDivider />
 
   <section class="mx-auto max-w-6xl px-4 sm:px-6 py-20 reveal">
     <div class="mb-4 flex gap-6 text-sm font-semibold text-summit-fern/80 dark:text-summit-mist/80">

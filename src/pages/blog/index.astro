@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
+import SkylineDivider from '../../components/SkylineDivider.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
@@ -12,6 +13,7 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
 
 <BaseLayout title="Blog" description="Trip reports, training notes, and everything in between.">
   <Hero image="/images/climbs/washington.jpg" eyebrow="Field Notes" title="Blog" subtitle="Trip reports, training notes, and lessons learned along the way." size="md" />
+  <SkylineDivider />
 
   <section class="mx-auto max-w-4xl px-4 sm:px-6 py-20 reveal">
     <div class="space-y-8">

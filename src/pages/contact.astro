@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import SkylineDivider from '../components/SkylineDivider.astro';
 
 const FORMSPREE_ID = 'xkodekkv';
 const formAction = `https://formspree.io/f/${FORMSPREE_ID}`;
@@ -10,6 +11,7 @@ const contactEmail = 'jono2perez@gmail.com';
 
 <BaseLayout title="Contact" description="Get in touch.">
   <Hero image="/images/climbs/iztaccihuatl.jpg" eyebrow="Say Hello" title="Get in Touch" subtitle="Questions about a route, gear, or just want to say hi?" size="md" />
+  <SkylineDivider />
 
   <section class="mx-auto max-w-2xl px-4 sm:px-6 py-20 reveal">
     {!isConfigured && (

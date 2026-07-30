@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
+import SkylineDivider from '../../components/SkylineDivider.astro';
 import GearCard from '../../components/GearCard.astro';
 import { getCollection } from 'astro:content';
 
@@ -10,6 +11,7 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
 
 <BaseLayout title="Gear Reviews" description="Field notes on the gear I actually use.">
   <Hero image="/images/climbs/washington.jpg" eyebrow="The Kit" title="Gear Reviews" subtitle="Real field notes — what earned its place in the pack and what didn't." size="md" />
+  <SkylineDivider />
 
   <section class="mx-auto max-w-6xl px-4 sm:px-6 py-20 reveal">
     <div class="mb-6 flex justify-end">

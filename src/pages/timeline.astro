@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import SkylineDivider from '../components/SkylineDivider.astro';
 import { getCollection } from 'astro:content';
 
 const climbs = await getCollection('climbs', ({ data }) => !data.draft);
@@ -44,6 +45,7 @@ const kindStyles = {
 
 <BaseLayout title="Timeline" description="The whole journey, in order.">
   <Hero image="/images/climbs/iztaccihuatl.jpg" eyebrow="The Journey" title="Timeline" subtitle="Every summit, plan, and journal entry, laid out in order." size="md" />
+  <SkylineDivider />
 
   <section class="mx-auto max-w-3xl px-4 sm:px-6 py-20 reveal">
     <div class="relative border-l-2 border-summit-fern/15 dark:border-white/15 pl-8 space-y-10">

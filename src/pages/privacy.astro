@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import SkylineDivider from '../components/SkylineDivider.astro';
 
 const lastUpdated = 'July 2026';
 const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
@@ -8,6 +9,7 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
 
 <BaseLayout title="Privacy Policy" description="What data this site collects, and what it doesn't.">
   <Hero image="/images/climbs/washington.jpg" eyebrow="Legal" title="Privacy Policy" subtitle="Short version: there's barely any data collection here, and here's exactly what there is." size="md" />
+  <SkylineDivider />
 
   <section class="mx-auto max-w-3xl px-4 sm:px-6 py-20 reveal">
     <p class="text-sm text-summit-fern/70 dark:text-summit-mist/80 mb-8">Last updated: {lastUpdated}</p>

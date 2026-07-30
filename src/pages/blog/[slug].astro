@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
+import SkylineDivider from '../../components/SkylineDivider.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -25,6 +26,7 @@ const totalCost = data.costBreakdown?.reduce((sum, c) => {
 
 <BaseLayout title={post.data.title} description={post.data.excerpt}>
   <Hero image={post.data.heroImage || '/images/placeholders/snow.svg'} eyebrow="Field Notes" title={post.data.title} size="md" />
+  <SkylineDivider />
 
   <article class="mx-auto max-w-3xl px-4 sm:px-6 py-20 reveal">
     <p class="text-sm font-semibold uppercase tracking-wide text-summit-ember-dark dark:text-summit-ember">
