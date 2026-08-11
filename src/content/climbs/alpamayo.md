@@ -10,6 +10,7 @@ difficulty: "Extreme (technical ice, steep fluted face)"
 route: "Southwest Face (Ferrari Route)"
 coordinates: [-8.8722, -77.6967]
 heroImage: "/images/climbs/alpamayo.jpg"
+heroImagePosition: "50% 10%"
 profile:
   - label: "Cashapampa Trailhead"
     elevationFt: 9514

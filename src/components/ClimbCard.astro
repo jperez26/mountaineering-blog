@@ -13,7 +13,13 @@ const image = data.heroImage || '/images/placeholders/sunrise.svg';
 
 <a href={withBase(`${basePath}/${id}`)} class="group block overflow-hidden rounded-2xl bg-white dark:bg-summit-fern shadow-md ring-1 ring-summit-fern/5 dark:ring-white/10 card-hover">
   <div class="relative h-52 overflow-hidden">
-    <img src={withBase(image)} alt={data.title} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+    <img
+      src={withBase(image)}
+      alt={data.title}
+      class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+      style={data.heroImagePosition ? `object-position: ${data.heroImagePosition}` : undefined}
+      loading="lazy"
+    />
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/25"></div>
     <span
       class:list={[

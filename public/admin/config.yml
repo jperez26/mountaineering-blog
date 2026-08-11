@@ -43,6 +43,7 @@ collections:
         hint: "Enter exactly two numbers: latitude, then longitude."
         field: { label: "Value", name: "value", widget: "number" }
       - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+      - { label: "Hero Image Crop Position", name: "heroImagePosition", widget: "string", required: false, hint: "Only needed if the summit's photo gets cropped oddly in the small card view. e.g. \"50% 10%\" biases the crop toward the top (use this if the peak sits near the top of the photo)." }
       - label: "Gallery"
         name: "gallery"
         widget: "list"

@@ -20,6 +20,10 @@ const climbs = defineCollection({
     route: z.string().optional(),
     coordinates: z.tuple([z.number(), z.number()]).optional(),
     heroImage: z.string().optional(),
+    // CSS object-position for heroImage, e.g. "50% 15%" — most photos crop
+    // fine centered, but a few have the summit close enough to the frame
+    // edge that a center-crop clips the tip in the small ClimbCard thumbnail.
+    heroImagePosition: z.string().optional(),
     gallery: z.array(z.string()).optional(),
     // Schematic route profile (trailhead -> summit), ordered start to finish.
     // Not to-scale GPS data — illustrative waypoints for the elevation chart.

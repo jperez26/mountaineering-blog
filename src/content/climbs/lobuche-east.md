@@ -10,6 +10,7 @@ difficulty: "Moderate / Technical (fixed-line snow and ice)"
 route: "Standard Route via High Camp"
 coordinates: [27.9435, 86.8133]
 heroImage: "/images/climbs/lobuche-east.jpg"
+heroImagePosition: "50% 10%"
 profile:
   - label: "Lobuche Village"
     elevationFt: 16207
