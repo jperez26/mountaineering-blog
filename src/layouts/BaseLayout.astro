@@ -11,14 +11,23 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  // Page-specific schema.org data (e.g. BlogPosting for a post) — rendered
+  // as its own <script type="application/ld+json">, in addition to the
+  // site-wide WebSite schema below.
+  jsonLd?: Record<string, unknown>;
 }
 
 const {
   title,
   description = 'Summit log, gear notes, and trip plans from the mountains.',
   image = '/images/climbs/kangchenjunga.jpg',
+  jsonLd,
 } = Astro.props;
 const siteTitle = 'Avg Joe Mountaineering';
+// Cloudflare Web Analytics — cookieless, no personal data collected. Get
+// this token from the Cloudflare dashboard: Analytics & Logs > Web
+// Analytics > Add a site. Left blank, the beacon script is skipped.
+const cfAnalyticsToken = '';
 const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(withBase(image), Astro.site);
@@ -46,6 +55,16 @@ const imageUrl = new URL(withBase(image), Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
 
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: siteTitle,
+      url: String(new URL(withBase('/'), Astro.site)),
+    })} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    {cfAnalyticsToken && (
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${cfAnalyticsToken}"}`}></script>
+    )}
   </head>
   <body class="min-h-screen flex flex-col bg-summit-snow dark:bg-summit-charcoal text-summit-forest dark:text-summit-mist font-body topo-bg transition-colors duration-200">
     <Nav siteTitle={siteTitle} />

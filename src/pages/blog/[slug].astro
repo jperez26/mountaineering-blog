@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import SkylineDivider from '../../components/SkylineDivider.astro';
+import Comments from '../../components/Comments.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -22,9 +23,22 @@ const totalCost = data.costBreakdown?.reduce((sum, c) => {
   const n = parseFloat(String(c.cost).replace(/[^0-9.]/g, ''));
   return Number.isFinite(n) ? sum + n : sum;
 }, 0);
+
+const postUrl = new URL(withBase(`/blog/${post.id}`), Astro.site);
+const postImageUrl = new URL(withBase(data.heroImage || '/images/placeholders/snow.svg'), Astro.site);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: data.title,
+  description: data.excerpt,
+  datePublished: data.date.toISOString(),
+  image: String(postImageUrl),
+  mainEntityOfPage: String(postUrl),
+  author: { '@type': 'Person', name: 'Joe' },
+};
 ---
 
-<BaseLayout title={post.data.title} description={post.data.excerpt}>
+<BaseLayout title={post.data.title} description={post.data.excerpt} image={data.heroImage} jsonLd={jsonLd}>
   <Hero image={post.data.heroImage || '/images/placeholders/snow.svg'} eyebrow="Field Notes" title={post.data.title} size="md" />
   <SkylineDivider />
 
@@ -86,5 +100,7 @@ const totalCost = data.costBreakdown?.reduce((sum, c) => {
       <Content />
     </div>
     <a href={withBase('/blog')} class="mt-10 inline-block text-sm font-semibold text-summit-ember-dark dark:text-summit-ember hover:underline">← Back to Blog</a>
+
+    <Comments />
   </article>
 </BaseLayout>
