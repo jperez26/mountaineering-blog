@@ -14,7 +14,7 @@ const heightClass = size === 'lg' ? 'h-[75vh] min-h-[480px]' : 'h-[42vh] min-h-[
 const gallery = images && images.length > 0 ? images : image ? [image] : [];
 ---
 
-<section class={`relative ${heightClass} w-full overflow-hidden bg-summit-forest`}>
+<section class={`site-hero relative ${heightClass} w-full overflow-hidden bg-summit-forest`}>
   <div class="hero-photo-stack absolute inset-0 h-full w-full">
     {gallery.map((src, i) => (
       i === 0 ? (

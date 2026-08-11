@@ -191,3 +191,48 @@ h1, h2, h3, h4, .font-display {
   border-radius: 0.5rem;
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
+
+/* Print — strip decorative chrome (nav, footer, hero photos, skyline,
+   topo texture) so pages come out as plain black-on-white text, useful
+   for the gear checklist. */
+@media print {
+  header,
+  footer,
+  .site-hero,
+  .skyline-divider,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .topo-bg,
+  .drift-gradient {
+    background-image: none !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+  /* Force plain black-on-white regardless of light/dark theme — printing
+     the dark theme's colors would waste ink and some combinations are
+     barely legible on paper. */
+  .print-tier,
+  .print-tier * {
+    background: #fff !important;
+    color: #000 !important;
+    border-color: #999 !important;
+  }
+  .print-tier {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #999 !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+}

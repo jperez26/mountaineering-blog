@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') + href;
+---
+
+<BaseLayout title="Off Route" description="Page not found.">
+  <section class="mx-auto max-w-2xl px-4 sm:px-6 py-24 text-center">
+    <svg viewBox="0 0 120 90" class="mx-auto h-28 w-auto text-summit-fern dark:text-summit-moss" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M6 78 L34 30 L48 52 L66 18 L96 78" />
+      <path d="M66 18 L66 8" />
+      <path d="M66 8 L82 13.5 L66 19 Z" fill="var(--color-summit-ember)" stroke="none" />
+      <circle cx="48" cy="52" r="2.6" fill="currentColor" stroke="none" />
+      <path d="M40 60 L56 46" stroke="var(--color-summit-ember)" stroke-width="2.4" stroke-dasharray="1 6" />
+      <path d="M56 46 L58 40 M56 46 L62 47" stroke="var(--color-summit-ember)" stroke-width="2.4" />
+    </svg>
+
+    <p class="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-summit-ember-dark dark:text-summit-ember">404</p>
+    <h1 class="mt-2 font-display text-3xl sm:text-4xl font-bold text-summit-forest dark:text-summit-mist">
+      You've wandered off route
+    </h1>
+    <p class="mt-4 text-summit-fern/90 dark:text-summit-mist/80">
+      There's no waypoint here — the page you're looking for doesn't exist, or it's been moved.
+    </p>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href={withBase('/')} class="rounded-full bg-summit-ember px-6 py-3 font-semibold text-summit-forest hover:bg-orange-400 transition-colors">
+        Back to Base Camp
+      </a>
+      <a href={withBase('/summits')} class="rounded-full border border-summit-fern/30 dark:border-white/20 px-6 py-3 font-semibold text-summit-forest dark:text-summit-mist hover:bg-summit-fern/5 dark:hover:bg-white/5 transition-colors">
+        See Past Summits
+      </a>
+    </div>
+  </section>
+</BaseLayout>

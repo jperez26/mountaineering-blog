@@ -10,24 +10,43 @@ import { gearByElevation } from '../../data/gearByElevation';
   <SkylineDivider />
 
   <section class="mx-auto max-w-4xl px-4 sm:px-6 py-20 space-y-8">
+    <div class="no-print flex justify-end">
+      <button id="print-guide" type="button" class="flex items-center gap-2 rounded-full border border-summit-fern/30 dark:border-white/20 px-5 py-2.5 text-sm font-semibold text-summit-forest dark:text-summit-mist hover:bg-summit-fern/5 dark:hover:bg-white/5 transition-colors">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6M6 18h12v3H6zM4 9h16v7H4z" /></svg>
+        Print Checklist
+      </button>
+    </div>
     {gearByElevation.map((tier) => (
-      <div id={tier.id} class="rounded-2xl border border-summit-fern/10 dark:border-white/15 bg-white dark:bg-summit-fern shadow-md overflow-hidden reveal">
+      <div id={tier.id} class="print-tier rounded-2xl border border-summit-fern/10 dark:border-white/15 bg-white dark:bg-summit-fern shadow-md overflow-hidden reveal">
         <div class="drift-gradient text-summit-snow px-6 py-5">
           <p class="text-sm font-semibold uppercase tracking-wide text-summit-moss">{tier.range}</p>
           <h2 class="font-display text-2xl font-bold">{tier.title}</h2>
           <p class="mt-1 text-summit-mist/80 text-sm">{tier.description}</p>
         </div>
-        <div class="p-6 grid gap-6 sm:grid-cols-2">
-          {tier.categories.map((cat) => (
-            <div>
-              <p class="font-semibold text-summit-forest dark:text-summit-mist">{cat.category}</p>
-              <ul class="mt-2 space-y-1 text-sm text-summit-fern/90 dark:text-summit-mist/80 list-disc list-inside">
-                {cat.items.map((item) => <li>{item}</li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
+        {tier.notesOnly ? (
+          <p class="p-6 text-sm italic text-summit-fern/80 dark:text-summit-mist/70">{tier.notesOnly}</p>
+        ) : (
+          <div class="p-6 grid gap-6 sm:grid-cols-2">
+            {tier.categories.map((cat) => (
+              <div>
+                <p class="font-semibold text-summit-forest dark:text-summit-mist">{cat.category}</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-summit-fern/90 dark:text-summit-mist/80">
+                  {cat.items.map((item) => (
+                    <li class="flex items-start gap-2">
+                      <span class="checklist-box mt-0.5 h-3.5 w-3.5 shrink-0 rounded-sm border border-current"></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     ))}
   </section>
+
+  <script>
+    document.getElementById('print-guide')?.addEventListener('click', () => window.print());
+  </script>
 </BaseLayout>

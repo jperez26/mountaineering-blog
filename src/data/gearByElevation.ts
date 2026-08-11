@@ -11,6 +11,9 @@ export interface GearTier {
     category: string;
     items: string[];
   }[];
+  // For tiers with no real-world experience to draw on yet — shown instead
+  // of the category grid rather than guessing at a gear list.
+  notesOnly?: string;
 }
 
 export const gearByElevation: GearTier[] = [
@@ -53,11 +56,19 @@ export const gearByElevation: GearTier[] = [
     ],
   },
   {
+    id: '19-7k-23k',
+    range: '19,685 – 22,966 ft (6,000 – 7,000 m)',
+    title: 'Trekking Peaks & First 6,000ers',
+    description: "Above most 14,000 ft peaks but still short of full 8,000m expedition territory.",
+    categories: [],
+    notesOnly: "Not sure yet — haven't done one of these yet. Will fill this in after Lobuche East.",
+  },
+  {
     id: '18k-plus',
-    range: '18,000 ft+',
+    range: '22,966 ft+ (7,000 m+)',
     title: '8,000ers & High-Altitude Expeditions',
     description:
-      'Sustained time above 18k where supplemental oxygen, fixed lines, and serious logistics come into play.',
+      'Sustained time above 7,000m where supplemental oxygen, fixed lines, and serious logistics come into play.',
     categories: [
       { category: 'Oxygen system', items: ['Mask + regulator', 'Oxygen bottles (cached via logistics team)'] },
       { category: 'Footwear', items: ['8,000m-rated triple boots'] },

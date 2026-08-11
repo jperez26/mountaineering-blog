@@ -13,6 +13,12 @@ Mountain photos are sourced from Wikimedia Commons under their original licenses
 | `public/images/climbs/iztaccihuatl.jpg` | Iztaccíhuatl, Mexico | AlejandroLinaresGarcia | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:IztaccihualtSacromonte1.JPG) |
 | `public/images/climbs/kangchenjunga.jpg` | Kangchenjunga, full massif from Pelling | Sudipto2cool | CC BY 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Kanchenjunga_from_Pelling.jpg) |
 | `public/images/climbs/kangchenjunga-glacier.jpg` | Kangchenjunga, close glacier view | Tomabarker | CC BY 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Kangchenjunga_PangPema.JPG) |
+| `public/images/climbs/cotopaxi.jpg` | Cotopaxi, Ecuador | Superbass | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Ecua_2004_Cotopaxi_1.jpg) |
+| `public/images/climbs/chimborazo.jpg` | Chimborazo, Ecuador | amalavida.tv | CC BY-SA 2.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:AMA_Volc%C3%A1n_Chimborazo_3_(8226318049).jpg) |
+| `public/images/climbs/cayambe.jpg` | Cayambe, Ecuador | Ymblanter | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Cayambe_volcano_seen_from_Museo_Solar_1.jpg) |
+| `public/images/climbs/alpamayo.jpg` | Alpamayo, Peru | Frank R 1981 | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Alpamayo_12.jpg) |
+| `public/images/climbs/matterhorn.jpg` | Matterhorn, Switzerland | Dennis G. Jarvis | CC BY-SA 2.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Switzerland-02082_-_First_View_of_the_Matterhorn_(22586306767).jpg) |
+| `public/images/climbs/lobuche-east.jpg` | Lobuche East, Nepal | Theprotrekker | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Lobuche_East_Peak.jpg) |
 
 ## Homepage rotation — the 14 eight-thousanders
 
