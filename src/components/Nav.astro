@@ -1,6 +1,5 @@
 ---
 import NavIcon from './NavIcon.astro';
-import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
   siteTitle: string;
@@ -86,11 +85,22 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
           <NavIcon name="knot" class="h-[18px] w-[18px] text-summit-forest" />
           Contact
         </a>
-        <ThemeToggle class="text-summit-snow" />
+        <a
+          href={withBase('/search')}
+          aria-label="Search"
+          class:list={[
+            'inline-flex items-center justify-center rounded-full p-2 transition-colors hover:text-summit-moss',
+            path.startsWith('/search') ? 'text-summit-moss' : 'text-summit-snow',
+          ]}
+        >
+          <NavIcon name="search" class="h-[18px] w-[18px]" />
+        </a>
       </nav>
 
       <div class="flex items-center gap-1 lg:hidden">
-        <ThemeToggle class="text-summit-snow" />
+        <a href={withBase('/search')} aria-label="Search" class="inline-flex items-center justify-center rounded-full p-2 text-summit-snow transition-colors hover:text-summit-moss">
+          <NavIcon name="search" class="h-[18px] w-[18px]" />
+        </a>
         <button id="menu-toggle" class="p-2" aria-label="Toggle menu" aria-expanded="false">
           <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -106,6 +116,7 @@ const withBase = (href: string) => import.meta.env.BASE_URL.replace(/\/$/, '') +
           { href: '/gear', label: 'Gear Reviews', icon: 'carabiner' as const },
           { href: '/gear/guide', label: 'Buying Guide', icon: 'carabiner' as const },
           { href: '/gallery', label: 'Gallery', icon: 'camera' as const },
+          { href: '/search', label: 'Search', icon: 'search' as const },
           { href: '/contact', label: 'Contact', icon: 'knot' as const },
         ].map((link) => (
           <a href={withBase(link.href)} class="flex items-center gap-2 py-2 border-b border-white/5 last:border-0 hover:text-summit-moss">

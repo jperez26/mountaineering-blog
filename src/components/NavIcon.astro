@@ -3,7 +3,7 @@
 // All strokes use currentColor so they inherit the link's hover/active color;
 // the small accent dots (flag, waypoint) stay a fixed ember tone on purpose.
 interface Props {
-  name: 'home' | 'blog' | 'axe' | 'screw' | 'timeline' | 'map' | 'carabiner' | 'camera' | 'knot';
+  name: 'home' | 'blog' | 'axe' | 'screw' | 'timeline' | 'map' | 'carabiner' | 'camera' | 'knot' | 'search';
   class?: string;
 }
 const { name, class: className = 'h-[18px] w-[18px]' } = Astro.props;
@@ -71,6 +71,13 @@ const { name, class: className = 'h-[18px] w-[18px]' } = Astro.props;
   <svg viewBox="0 0 24 24" class={className} fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
     <path d="M9 6 L10 4 H14 L15 6 H19.5 V18.5 H4.5 V6 Z" />
     <circle cx="12" cy="12" r="3.8" />
+  </svg>
+)}
+
+{name === 'search' && (
+  <svg viewBox="0 0 24 24" class={className} fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="10.5" cy="10.5" r="6.5" />
+    <line x1="15.3" y1="15.3" x2="20.5" y2="20.5" />
   </svg>
 )}
 

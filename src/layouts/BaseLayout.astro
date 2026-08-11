@@ -25,7 +25,7 @@ const imageUrl = new URL(withBase(image), Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -46,24 +46,10 @@ const imageUrl = new URL(withBase(image), Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
 
-    <script is:inline>
-      (function () {
-        try {
-          var stored = localStorage.getItem('theme');
-          var theme =
-            stored === 'light' || stored === 'dark'
-              ? stored
-              : window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? 'dark'
-                : 'light';
-          document.documentElement.setAttribute('data-theme', theme);
-        } catch (e) {}
-      })();
-    </script>
   </head>
   <body class="min-h-screen flex flex-col bg-summit-snow dark:bg-summit-charcoal text-summit-forest dark:text-summit-mist font-body topo-bg transition-colors duration-200">
     <Nav siteTitle={siteTitle} />
-    <main class="flex-1">
+    <main class="flex-1" data-pagefind-body>
       <slot />
     </main>
     <Footer siteTitle={siteTitle} />
