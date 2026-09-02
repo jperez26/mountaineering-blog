@@ -61,3 +61,9 @@ Visit `https://YOUR-USERNAME.github.io/mountaineering-blog/admin/`, click **Logi
 - Double check the callback URL in the GitHub OAuth App **exactly** matches `<worker-url>/callback` (no trailing slash mismatch).
 - Reconfirm the two secrets were set on the *same* Worker you deployed (`wrangler secret list` shows names, not values).
 - The GitHub account you log in with needs push access to the repo — since it's your own repo, your own account already has this.
+
+## Adding a new entry — always start from the "+" button
+
+To create a new Climb, Blog Post, or Gear Review, go to the collection's list view and click the **"+"** button at the top (e.g. "+ Gear Reviews"). Publishing from that screen always creates a brand-new file.
+
+If you instead open an *existing* entry and change its fields, Publish will save those changes back into that same existing entry — overwriting it — even if you've replaced every field with something unrelated. There's no separate "Save as new" action, so double-check the URL/breadcrumb reads as a new, empty entry before you start typing.
