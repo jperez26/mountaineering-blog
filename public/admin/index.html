@@ -11,5 +11,56 @@
   <body>
     <!-- Decap CMS reads config.yml from this same /admin/ folder automatically. -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      // Workaround for a Decap CMS bug: list-widget fields (Pros, Cons,
+      // Elevation Tags, Tags, What To Bring, ...) trim trailing whitespace
+      // on every keystroke instead of only on save. Since a value momentarily
+      // ends in a space right after you press it, that space gets stripped
+      // before the next letter arrives - every space between words silently
+      // disappears while typing. This buffers a pressed Space and merges it
+      // with the next keystroke in one atomic update so the tracked value
+      // never passes through a trailing-space state.
+      (function () {
+        var pendingSpaceEl = null;
+
+        function reactSetValue(el, value, caret) {
+          var setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+          setter.call(el, value);
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+          requestAnimationFrame(function () {
+            el.selectionStart = el.selectionEnd = caret;
+          });
+        }
+
+        document.addEventListener('keydown', function (e) {
+          var el = e.target;
+          var isTextField = el.tagName === 'INPUT' || el.tagName === 'TEXTAREA';
+          if (!isTextField) return;
+
+          if (pendingSpaceEl && pendingSpaceEl !== el) pendingSpaceEl = null;
+
+          if (e.key === ' ') {
+            e.preventDefault();
+            pendingSpaceEl = el;
+            return;
+          }
+
+          if (pendingSpaceEl === el && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            e.preventDefault();
+            var start = el.selectionStart, end = el.selectionEnd;
+            var newVal = el.value.slice(0, start) + ' ' + e.key + el.value.slice(end);
+            reactSetValue(el, newVal, start + 2);
+            pendingSpaceEl = null;
+            return;
+          }
+
+          if (pendingSpaceEl === el) {
+            pendingSpaceEl = null;
+            var s = el.selectionStart, en = el.selectionEnd;
+            reactSetValue(el, el.value.slice(0, s) + ' ' + el.value.slice(en), s + 1);
+          }
+        }, true);
+      })();
+    </script>
   </body>
 </html>
